@@ -5,20 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Olu Lawrence — SRE & Cloud Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --bg: #f7f6f2;
+    --bg: #fafaf8;
     --surface: #ffffff;
-    --surface2: #f0efe9;
-    --border: #e8e6df;
-    --border-dark: #d4d0c8;
+    --surface2: #f4f3ef;
+    --border: #e0ddd6;
+    --border-dark: #c8c4bb;
     --text: #1a1917;
-    --muted: #8a8880;
-    --accent: #1a1917;
-    --accent2: #c84b2f;
-    --accent3: #2d6a4f;
-    --link: #2c5282;
+    --muted: #9a9690;
+    --red: #e63946;
+    --ink: #1a1917;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -34,296 +32,385 @@
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 60px;
-    background: rgba(247,246,242,0.95);
+    background: rgba(250,250,248,0.97);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--text);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: stretch;
+    padding: 0 48px;
+  }
+  .nav-logo-wrap {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 14px 0; border-right: 1px solid var(--border);
+    padding-right: 32px; margin-right: 32px;
+  }
+  .nav-logo-label {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px;
   }
   .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px; font-weight: 700;
-    color: var(--text); text-decoration: none; letter-spacing: -0.5px;
+    font-family: 'Playfair Display', serif; font-size: 20px;
+    font-weight: 900; color: var(--text); text-decoration: none; letter-spacing: -0.5px;
   }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links { display: flex; gap: 0; list-style: none; }
+  .nav-links li { border-right: 1px solid var(--border); }
   .nav-links a {
-    font-family: 'DM Mono', monospace; font-size: 10px;
+    display: flex; align-items: center;
+    padding: 0 20px; height: 100%;
+    font-family: 'DM Mono', monospace; font-size: 9px;
     color: var(--muted); text-decoration: none;
-    letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s;
+    letter-spacing: 2px; text-transform: uppercase; transition: all 0.2s;
   }
-  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover { color: var(--text); background: var(--surface2); }
+  .nav-right {
+    display: flex; align-items: center;
+    margin-left: auto; padding-left: 24px;
+  }
+  .nav-status {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    color: var(--red); letter-spacing: 1px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .status-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
   section { position: relative; }
+  .divider { border: none; border-top: 1px solid var(--border); }
+  .divider-bold { border: none; border-top: 2px solid var(--text); }
 
   /* HERO */
-  .hero {
-    min-height: 100vh; display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 0; padding: 0 60px;
-    max-width: 1200px; margin: 0 auto;
-    align-items: center; padding-top: 80px;
+  .hero-wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; padding-top: 80px; }
+
+  /* Masthead banner */
+  .masthead {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0 16px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.1s;
   }
-  .hero-left { padding-right: 60px; border-right: 1px solid var(--border); }
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace; font-size: 10px;
+  .masthead-date {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .masthead-issue {
+    font-family: 'Playfair Display', serif; font-size: 11px;
+    font-style: italic; color: var(--muted);
+  }
+  .masthead-tags { display: flex; gap: 8px; }
+  .masthead-tag {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    padding: 2px 8px; border: 1px solid var(--border-dark);
+    color: var(--muted); letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* Hero grid — magazine layout */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr 2px 320px;
+    gap: 0;
+    padding: 40px 0;
+    border-bottom: 2px solid var(--text);
+  }
+  .hero-col-divider { background: var(--border); }
+
+  .hero-col-1 { padding-right: 40px; }
+  .hero-col-2 { padding: 0 40px; }
+  .hero-col-3 { padding-left: 40px; }
+
+  .col-label {
+    font-family: 'DM Mono', monospace; font-size: 8px;
     color: var(--muted); letter-spacing: 3px; text-transform: uppercase;
-    margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
-    opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
+    margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.2s;
   }
-  .eyebrow-line { height: 1px; width: 32px; background: var(--border-dark); }
+
   .hero-name {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(56px, 7vw, 88px);
-    font-weight: 900; line-height: 0.92; letter-spacing: -3px;
-    margin-bottom: 24px; color: var(--text);
-    opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 900; line-height: 0.9; letter-spacing: -3px;
+    color: var(--text); margin-bottom: 16px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.3s;
   }
-  .hero-name em { font-style: italic; color: var(--muted); }
-  .hero-divider {
-    height: 2px; width: 48px; background: var(--accent2);
-    margin-bottom: 24px;
-    opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
+  .hero-name em { font-style: italic; color: var(--muted); display: block; }
+
+  .hero-red-bar {
+    height: 3px; background: var(--red); width: 48px; margin-bottom: 16px;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.45s;
   }
+
   .hero-title {
-    font-family: 'DM Mono', monospace; font-size: 11px;
+    font-family: 'DM Mono', monospace; font-size: 10px;
     color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
-    margin-bottom: 28px;
-    opacity: 0; animation: fadeUp 0.7s ease forwards 0.55s;
+    margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.5s;
   }
-  .hero-desc {
-    font-size: 15px; color: #5a5854; max-width: 480px;
-    line-height: 1.8; margin-bottom: 40px;
-    opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s;
+
+  .hero-lede {
+    font-family: 'Playfair Display', serif; font-size: 16px;
+    font-style: italic; color: #5a5854; line-height: 1.6;
+    margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.55s;
   }
-  .hero-desc strong { color: var(--text); font-weight: 500; }
-  .hero-actions {
-    display: flex; gap: 14px; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.7s ease forwards 0.8s;
+
+  .hero-body {
+    font-size: 13px; color: #6a6762; line-height: 1.75;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.6s;
   }
+  .hero-body strong { color: var(--text); font-weight: 500; }
+
+  /* Stats column */
+  .stat-block {
+    margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.4s;
+  }
+  .stat-block:last-child { border-bottom: none; margin-bottom: 0; }
+  .stat-num {
+    font-family: 'Playfair Display', serif; font-size: 52px;
+    font-weight: 900; color: var(--text); line-height: 1; letter-spacing: -3px;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;
+  }
+
+  /* Skills pullquote col */
+  .hero-col-2-inner {
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.5s;
+  }
+  .pullquote {
+    font-family: 'Playfair Display', serif; font-size: 22px;
+    font-style: italic; font-weight: 700; color: var(--text);
+    line-height: 1.3; margin-bottom: 24px; padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pullquote span { color: var(--red); }
+  .skills-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+  .skill-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 12px; color: #6a6762;
+  }
+  .skill-row-name { font-weight: 400; }
+  .skill-row-tag {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    color: var(--muted); letter-spacing: 1px;
+  }
+  .hero-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
   .btn-primary {
-    padding: 12px 28px; background: var(--text); color: var(--bg);
-    font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 400;
+    display: block; text-align: center;
+    padding: 12px 20px; background: var(--text); color: var(--bg);
+    font-family: 'DM Mono', monospace; font-size: 9px;
     letter-spacing: 2px; text-transform: uppercase;
-    text-decoration: none; transition: all 0.2s;
+    text-decoration: none; transition: background 0.2s;
   }
   .btn-primary:hover { background: #333; }
   .btn-outline {
-    padding: 12px 28px; border: 1px solid var(--border-dark); color: var(--muted);
-    font-family: 'DM Mono', monospace; font-size: 10px;
+    display: block; text-align: center;
+    padding: 12px 20px; border: 1px solid var(--border-dark); color: var(--muted);
+    font-family: 'DM Mono', monospace; font-size: 9px;
     letter-spacing: 2px; text-transform: uppercase;
     text-decoration: none; transition: all 0.2s;
   }
   .btn-outline:hover { border-color: var(--text); color: var(--text); }
 
-  .hero-right {
-    padding-left: 48px;
-    opacity: 0; animation: fadeUp 0.7s ease forwards 0.9s;
-  }
-  .hero-stats { display: flex; flex-direction: column; gap: 0; }
-  .stat-item {
-    padding: 24px 0; border-bottom: 1px solid var(--border);
-  }
-  .stat-item:first-child { padding-top: 0; }
-  .stat-item:last-child { border-bottom: none; }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 44px; font-weight: 900; color: var(--text);
-    line-height: 1; letter-spacing: -2px; margin-bottom: 4px;
-  }
-  .stat-label {
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
-  }
-
-  .tech-strip {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 40px;
-    padding-top: 40px; border-top: 1px solid var(--border);
-    opacity: 0; animation: fadeUp 0.7s ease forwards 1s;
-  }
-  .tech-tag {
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    padding: 4px 10px; border: 1px solid var(--border-dark);
-    color: var(--muted); letter-spacing: 1px; background: var(--surface);
-  }
-
   @keyframes fadeUp {
-    from { opacity:0; transform: translateY(16px); }
+    from { opacity:0; transform: translateY(12px); }
     to   { opacity:1; transform: translateY(0); }
   }
 
   /* SECTION */
-  .section-wrap { max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
-  .section-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 64px; }
-  .section-num {
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    color: var(--muted); letter-spacing: 2px;
+  .section-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 48px; }
+  .section-masthead {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 2px solid var(--text); padding-bottom: 10px; margin-bottom: 48px;
   }
   .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: 36px; font-weight: 700; letter-spacing: -1px; color: var(--text);
+    font-size: 28px; font-weight: 900; letter-spacing: -1px; color: var(--text);
   }
-  .section-line { flex: 1; height: 1px; background: var(--border); margin-left: 8px; }
-  .divider { border: none; border-top: 1px solid var(--border); }
+  .section-num {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    color: var(--muted); letter-spacing: 2px;
+  }
 
   /* SKILLS */
-  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .skill-group { background: var(--bg); padding: 32px; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); }
+  .skill-group { padding: 28px 32px; border-right: 1px solid var(--border); }
+  .skill-group:last-child { border-right: none; }
   .skill-group-title {
-    font-family: 'DM Mono', monospace; font-size: 9px; color: var(--accent2);
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
-    padding-bottom: 14px; border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace; font-size: 8px; color: var(--red);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
   }
   .skill-list { display: flex; flex-direction: column; gap: 10px; }
   .skill-item { display: flex; align-items: center; gap: 10px; }
-  .skill-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border-dark); flex-shrink: 0; }
-  .skill-dot.red { background: var(--accent2); }
-  .skill-dot.green { background: var(--accent3); }
-  .skill-name { font-size: 13px; color: #5a5854; }
+  .skill-dash { width: 12px; height: 1px; background: var(--border-dark); flex-shrink: 0; }
+  .skill-name { font-size: 12px; color: #6a6762; }
 
   /* EXPERIENCE */
   .experience-list { display: flex; flex-direction: column; }
   .exp-item {
-    display: grid; grid-template-columns: 220px 1fr;
-    gap: 48px; padding: 48px 0; border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 48px; padding: 40px 0;
+    border-bottom: 1px solid var(--border);
   }
   .exp-item:first-child { padding-top: 0; }
   .exp-item:last-child { border-bottom: none; }
-  .exp-left { padding-top: 4px; }
+  .exp-left {}
   .exp-date {
-    font-family: 'DM Mono', monospace; font-size: 10px;
+    font-family: 'DM Mono', monospace; font-size: 9px;
     color: var(--muted); letter-spacing: 1px; margin-bottom: 10px;
   }
   .exp-company {
-    font-family: 'Playfair Display', serif; font-size: 16px;
+    font-family: 'Playfair Display', serif; font-size: 15px;
     font-weight: 700; color: var(--text); margin-bottom: 2px;
   }
   .exp-client { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
   .exp-location {
     font-family: 'DM Mono', monospace; font-size: 9px;
-    color: #b0ada8; letter-spacing: 1px; margin-top: 6px;
+    color: #b8b4ae; margin-top: 8px; letter-spacing: 0.5px;
   }
   .exp-role {
     font-family: 'Playfair Display', serif; font-size: 20px;
-    font-weight: 700; margin-bottom: 16px; color: var(--text);
-    letter-spacing: -0.5px;
+    font-weight: 700; margin-bottom: 14px; color: var(--text); letter-spacing: -0.5px;
   }
-  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-  .exp-bullets li { display: flex; gap: 12px; font-size: 13px; color: #5a5854; line-height: 1.6; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .exp-bullets li {
+    display: flex; gap: 14px; font-size: 13px; color: #6a6762; line-height: 1.65;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .exp-bullets li:last-child { border-bottom: none; padding-bottom: 0; }
   .exp-bullets li::before {
-    content: '—'; color: var(--accent2); flex-shrink: 0;
-    font-family: 'DM Mono', monospace; font-size: 11px; margin-top: 2px;
+    content: '—'; color: var(--red); flex-shrink: 0;
+    font-family: 'DM Mono', monospace; font-size: 10px; margin-top: 3px;
   }
-  .exp-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .exp-tech { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
   .tech-pill {
-    font-family: 'DM Mono', monospace; font-size: 9px; padding: 3px 9px;
+    font-family: 'DM Mono', monospace; font-size: 8px; padding: 3px 8px;
     border: 1px solid var(--border); color: var(--muted);
-    background: var(--surface); letter-spacing: 0.5px;
+    background: var(--bg); letter-spacing: 0.5px;
   }
 
   /* INNOVATIONS */
-  .innovations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .innovation-card { background: var(--bg); padding: 32px; transition: background 0.2s; }
+  .innovations-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); }
+  .innovation-card {
+    padding: 28px 32px; border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border); transition: background 0.2s;
+  }
   .innovation-card:hover { background: var(--surface); }
+  .innovation-card:nth-child(3n) { border-right: none; }
+  .innovation-card:nth-last-child(-n+3) { border-bottom: none; }
   .innovation-num {
-    font-family: 'Playfair Display', serif; font-size: 32px;
-    font-weight: 900; color: var(--border-dark); margin-bottom: 12px;
-    line-height: 1;
+    font-family: 'Playfair Display', serif; font-size: 36px;
+    font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 12px;
   }
-  .innovation-title {
-    font-size: 14px; font-weight: 500; color: var(--text);
-    margin-bottom: 8px;
-  }
-  .innovation-desc { font-size: 12px; color: #8a8880; line-height: 1.6; }
+  .innovation-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+  .innovation-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
 
   /* PROJECTS */
-  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid var(--border); }
   .project-card {
-    background: var(--bg); padding: 32px;
+    padding: 32px; border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     text-decoration: none; display: block; color: inherit;
-    transition: background 0.2s; position: relative;
+    transition: background 0.2s;
   }
   .project-card:hover { background: var(--surface); }
+  .project-card:nth-child(2n) { border-right: none; }
+  .project-card:nth-last-child(-n+2) { border-bottom: none; }
   .project-card.featured { background: var(--text); }
-  .project-card.featured:hover { background: #333; }
-  .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .project-card.featured:hover { background: #2a2927; }
+  .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
   .proj-status {
     font-family: 'DM Mono', monospace; font-size: 8px;
-    padding: 3px 8px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 2px 8px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid;
   }
-  .status-live { border: 1px solid var(--accent3); color: var(--accent3); }
-  .status-building { border: 1px solid #c28a00; color: #c28a00; }
-  .status-planned { border: 1px solid var(--border-dark); color: var(--muted); }
-  .status-wip { border: 1px solid var(--accent3); color: var(--accent3); }
+  .status-live { border-color: #2d6a4f; color: #2d6a4f; }
+  .status-building { border-color: #b07d00; color: #b07d00; }
+  .status-planned { border-color: var(--border-dark); color: var(--muted); }
+  .status-wip { border-color: #2d6a4f; color: #2d6a4f; }
   .proj-name {
     font-family: 'Playfair Display', serif; font-size: 18px;
-    font-weight: 700; margin-bottom: 10px; color: var(--text);
-    letter-spacing: -0.5px;
+    font-weight: 700; margin-bottom: 10px; color: var(--text); letter-spacing: -0.5px;
   }
   .project-card.featured .proj-name { color: var(--bg); }
-  .project-card.featured .proj-status { border-color: rgba(247,246,242,0.4); color: rgba(247,246,242,0.7); }
-  .proj-desc { font-size: 12px; color: #8a8880; line-height: 1.6; margin-bottom: 20px; }
-  .project-card.featured .proj-desc { color: rgba(247,246,242,0.6); }
+  .project-card.featured .proj-status { border-color: rgba(250,250,248,0.3); color: rgba(250,250,248,0.6); }
+  .proj-desc { font-size: 12px; color: #8a8680; line-height: 1.65; margin-bottom: 20px; }
+  .project-card.featured .proj-desc { color: rgba(250,250,248,0.55); }
   .proj-footer { display: flex; justify-content: space-between; align-items: center; }
   .proj-lang {
     font-family: 'DM Mono', monospace; font-size: 9px;
     color: var(--muted); display: flex; align-items: center; gap: 6px;
   }
-  .project-card.featured .proj-lang { color: rgba(247,246,242,0.5); }
+  .project-card.featured .proj-lang { color: rgba(250,250,248,0.4); }
   .lang-dot { width: 6px; height: 6px; border-radius: 50%; }
   .dot-go { background: #00add8; }
   .dot-dt { background: #00b4a0; }
   .dot-tf { background: #818cf8; }
-  .dot-sh { background: #c28a00; }
-  .proj-arrow { color: var(--muted); font-size: 14px; transition: transform 0.2s; }
-  .project-card.featured .proj-arrow { color: rgba(247,246,242,0.5); }
+  .proj-arrow { color: var(--muted); font-size: 13px; transition: transform 0.2s; }
+  .project-card.featured .proj-arrow { color: rgba(250,250,248,0.4); }
   .project-card:hover .proj-arrow { transform: translate(3px,-3px); }
   .projects-note {
-    margin-top: 24px; padding: 16px 20px;
-    border: 1px solid var(--border); background: var(--surface);
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    color: var(--muted); letter-spacing: 0.5px; line-height: 1.6;
+    margin-top: 16px;
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    color: var(--muted); letter-spacing: 0.5px; line-height: 1.7;
+    border-left: 2px solid var(--red); padding-left: 14px;
   }
   .projects-note a { color: var(--text); }
 
   /* CERTS */
-  .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .cert-card { background: var(--bg); padding: 24px 28px; transition: background 0.2s; }
-  .cert-card:hover { background: var(--surface); }
-  .cert-issuer {
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    color: var(--accent2); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;
+  .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); }
+  .cert-card {
+    padding: 22px 28px; border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border); transition: background 0.2s;
   }
-  .cert-name { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; }
+  .cert-card:hover { background: var(--surface); }
+  .cert-card:nth-child(3n) { border-right: none; }
+  .cert-card:nth-last-child(-n+3) { border-bottom: none; }
+  .cert-issuer {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    color: var(--red); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .cert-name { font-size: 12px; font-weight: 500; color: var(--text); line-height: 1.4; }
 
   /* CONTACT */
-  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 2px 1fr;
+    gap: 0; border: 1px solid var(--border);
+  }
+  .contact-col-divider { background: var(--border); }
+  .contact-left { padding: 48px; }
   .contact-left h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 48px; font-weight: 900; letter-spacing: -2px;
-    line-height: 1; margin-bottom: 20px; color: var(--text);
+    font-size: 44px; font-weight: 900; letter-spacing: -2px;
+    line-height: 1; margin-bottom: 16px; color: var(--text);
   }
-  .contact-left h3 em { font-style: italic; color: var(--muted); }
-  .contact-left p { font-size: 14px; color: #8a8880; line-height: 1.8; }
-  .contact-links { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+  .contact-left h3 em { font-style: italic; color: var(--red); }
+  .contact-left p { font-size: 13px; color: #8a8680; line-height: 1.8; }
+  .contact-right { padding: 48px; }
+  .contact-links { display: flex; flex-direction: column; gap: 0; }
   .contact-link {
     display: flex; align-items: center; gap: 20px;
-    padding: 20px 24px; background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    text-decoration: none; color: inherit; transition: background 0.2s;
+    padding: 18px 0; border-bottom: 1px solid var(--border);
+    text-decoration: none; color: inherit; transition: padding-left 0.2s;
   }
+  .contact-link:first-child { padding-top: 0; }
   .contact-link:last-child { border-bottom: none; }
-  .contact-link:hover { background: var(--surface); }
+  .contact-link:hover { padding-left: 6px; }
   .contact-link-label {
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    color: var(--muted); letter-spacing: 2px; text-transform: uppercase;
-    width: 70px; flex-shrink: 0;
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    color: var(--muted); letter-spacing: 2px; text-transform: uppercase; width: 64px; flex-shrink: 0;
   }
   .contact-link-value { font-size: 13px; color: var(--text); }
-  .contact-link-arrow { margin-left: auto; color: var(--muted); font-size: 12px; transition: transform 0.2s; }
-  .contact-link:hover .contact-link-arrow { transform: translate(3px,-3px); }
+  .contact-link-arrow { margin-left: auto; color: var(--muted); font-size: 11px; }
 
   footer {
-    border-top: 1px solid var(--border); padding: 28px 60px;
+    border-top: 2px solid var(--text); padding: 20px 48px;
     max-width: 1200px; margin: 0 auto;
     display: flex; justify-content: space-between; align-items: center;
   }
@@ -331,79 +418,114 @@
     font-family: 'DM Mono', monospace; font-size: 9px;
     color: var(--muted); letter-spacing: 1px;
   }
-  .footer-text span { color: var(--text); }
+  .footer-masthead {
+    font-family: 'Playfair Display', serif; font-size: 14px;
+    font-weight: 900; font-style: italic; color: var(--text);
+  }
 
   @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { gap: 20px; }
-    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
-    .hero-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px; }
-    .hero-right { padding-left: 0; }
-    .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 24px; }
-    .stat-item { border-bottom: none; padding: 0; }
+    nav { padding: 0 24px; }
+    .hero-wrap { padding: 80px 24px 0; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-col-divider { display: none; }
+    .hero-col-1, .hero-col-2, .hero-col-3 { padding: 24px 0; border-bottom: 1px solid var(--border); }
     .section-wrap { padding: 60px 24px; }
-    .skills-grid, .certs-grid { grid-template-columns: 1fr; }
-    .innovations-grid, .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid, .certs-grid, .innovations-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
     .exp-item { grid-template-columns: 1fr; gap: 12px; }
-    .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-col-divider { display: none; }
     footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
   }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Olu Lawrence</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-inner">
+    <div class="nav-logo-wrap">
+      <div class="nav-logo-label">Portfolio</div>
+      <a href="#" class="nav-logo">Olu Lawrence</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-status"><span class="status-dot"></span>Open to opportunities</div>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section id="home">
-  <div class="hero">
-    <div class="hero-left">
-      <div class="hero-eyebrow">
-        <span class="eyebrow-line"></span>
-        North York, Ontario · Open to opportunities
-      </div>
-      <h1 class="hero-name">Olu<br><em>Law</em>rence</h1>
-      <div class="hero-divider"></div>
-      <p class="hero-title">Site Reliability & Cloud Engineer</p>
-      <p class="hero-desc">
-        <strong>10+ years</strong> building resilient infrastructure across financial services — Fidelity, Citibank, Morgan Stanley — and telecommunications. Deep expertise in cloud-native SRE, Kubernetes, and enterprise observability. AWS Certified Solutions Architect.
-      </p>
-      <div class="hero-actions">
-        <a href="#experience" class="btn-primary">View Experience</a>
-        <a href="#contact" class="btn-outline">Get in Touch</a>
-      </div>
-      <div class="tech-strip">
-        <span class="tech-tag">Dynatrace · DQL</span>
-        <span class="tech-tag">Kubernetes</span>
-        <span class="tech-tag">AWS · GCP · Azure</span>
-        <span class="tech-tag">Go</span>
-        <span class="tech-tag">OpenTelemetry</span>
-        <span class="tech-tag">Terraform</span>
+  <div class="hero-wrap">
+    <div class="masthead">
+      <span class="masthead-date">North York, Ontario · Canada · 2025</span>
+      <span class="masthead-issue">Site Reliability & Cloud Engineering</span>
+      <div class="masthead-tags">
+        <span class="masthead-tag">AWS Certified</span>
+        <span class="masthead-tag">Bilingual EN/FR</span>
+        <span class="masthead-tag">10+ Years</span>
       </div>
     </div>
-    <div class="hero-right">
-      <div class="hero-stats">
-        <div class="stat-item">
+
+    <div class="hero-grid">
+      <!-- Col 1: Name & intro -->
+      <div class="hero-col-1">
+        <div class="col-label">Lead Engineer</div>
+        <h1 class="hero-name">Olu<br><em>Lawrence</em></h1>
+        <div class="hero-red-bar"></div>
+        <p class="hero-title">Site Reliability & Cloud Engineer</p>
+        <p class="hero-lede">"Building the infrastructure that keeps systems observable, resilient, and fast."</p>
+        <p class="hero-body">
+          <strong>10+ years</strong> across financial services — Fidelity Investments, Citibank, Morgan Stanley — and telecommunications. Deep expertise in cloud-native SRE, Kubernetes orchestration, and enterprise observability at scale. Currently learning Go to build better DevOps tooling.
+        </p>
+      </div>
+
+      <div class="hero-col-divider"></div>
+
+      <!-- Col 2: Skills snapshot -->
+      <div class="hero-col-2">
+        <div class="col-label">Expertise Snapshot</div>
+        <div class="hero-col-2-inner">
+          <div class="pullquote">Reducing MTTR by <span>99%</span> through automation and observability.</div>
+          <div class="skills-list">
+            <div class="skill-row"><span class="skill-row-name">Dynatrace · DQL · BizEvents</span><span class="skill-row-tag">Expert</span></div>
+            <div class="skill-row"><span class="skill-row-name">Kubernetes · OpenShift · GKE · EKS</span><span class="skill-row-tag">Expert</span></div>
+            <div class="skill-row"><span class="skill-row-name">AWS · Azure · Google Cloud</span><span class="skill-row-tag">Expert</span></div>
+            <div class="skill-row"><span class="skill-row-name">Terraform · Ansible · Helm</span><span class="skill-row-tag">Advanced</span></div>
+            <div class="skill-row"><span class="skill-row-name">OpenTelemetry · Datadog · Prometheus</span><span class="skill-row-tag">Advanced</span></div>
+            <div class="skill-row"><span class="skill-row-name">Go (Golang)</span><span class="skill-row-tag">Learning</span></div>
+          </div>
+          <div class="hero-actions">
+            <a href="#experience" class="btn-primary">View Full Experience</a>
+            <a href="#contact" class="btn-outline">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-col-divider"></div>
+
+      <!-- Col 3: Stats -->
+      <div class="hero-col-3">
+        <div class="col-label">By the numbers</div>
+        <div class="stat-block">
           <div class="stat-num">10+</div>
           <div class="stat-label">Years Experience</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-block">
           <div class="stat-num">99%</div>
           <div class="stat-label">MTTR Reduction</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-block">
           <div class="stat-num">50+</div>
           <div class="stat-label">SLOs Instrumented</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-block">
           <div class="stat-num">70%+</div>
           <div class="stat-label">Ops Overhead Automated</div>
         </div>
@@ -417,40 +539,39 @@
 <!-- SKILLS -->
 <section id="about">
   <div class="section-wrap">
-    <div class="section-header">
-      <span class="section-num">01</span>
+    <div class="section-masthead">
       <h2 class="section-title">Core Competencies</h2>
-      <div class="section-line"></div>
+      <span class="section-num">Section 01</span>
     </div>
     <div class="skills-grid">
       <div class="skill-group">
         <div class="skill-group-title">Cloud & Infrastructure</div>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-dot red"></span><span class="skill-name">AWS (EKS, Aurora, DynamoDB, EC2)</span></div>
-          <div class="skill-item"><span class="skill-dot red"></span><span class="skill-name">Microsoft Azure (VMs, AD, AZ-104)</span></div>
-          <div class="skill-item"><span class="skill-dot red"></span><span class="skill-name">Google Cloud (GKE, Log Explorer)</span></div>
-          <div class="skill-item"><span class="skill-dot red"></span><span class="skill-name">Kubernetes, OpenShift, Docker</span></div>
-          <div class="skill-item"><span class="skill-dot red"></span><span class="skill-name">Terraform, Ansible, Helm, GitOps</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">AWS (EKS, Aurora, DynamoDB, EC2)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Microsoft Azure (VMs, AD, AZ-104)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Google Cloud (GKE, Log Explorer)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Kubernetes, OpenShift, Docker</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Terraform, Ansible, Helm, GitOps</span></div>
         </div>
       </div>
       <div class="skill-group">
         <div class="skill-group-title">Observability</div>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Dynatrace (DQL, Gen3, Grail, BizEvents)</span></div>
-          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">OpenTelemetry pipelines</span></div>
-          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Datadog, Prometheus, Grafana</span></div>
-          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Splunk, AppDynamics, Geneos ITRS</span></div>
-          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">SLI / SLO / Error Budget frameworks</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Dynatrace (DQL, Gen3, Grail, BizEvents)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">OpenTelemetry pipelines</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Datadog, Prometheus, Grafana</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Splunk, AppDynamics, Geneos ITRS</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">SLI / SLO / Error Budget frameworks</span></div>
         </div>
       </div>
       <div class="skill-group">
         <div class="skill-group-title">Engineering & Automation</div>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">Python, Bash, Perl, Java, C++</span></div>
-          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">Go (Golang) — actively learning</span></div>
-          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">CI/CD · Jenkins · GitHub Actions</span></div>
-          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">Kafka, Redis, PostgreSQL, MongoDB</span></div>
-          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">FIX Protocol, Blockchain</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Python, Bash, Perl, Java, C++</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Go (Golang) — actively learning</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">CI/CD · Jenkins · GitHub Actions</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Kafka, Redis, PostgreSQL, MongoDB</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">FIX Protocol, Blockchain</span></div>
         </div>
       </div>
     </div>
@@ -462,10 +583,9 @@
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-wrap">
-    <div class="section-header">
-      <span class="section-num">02</span>
+    <div class="section-masthead">
       <h2 class="section-title">Experience</h2>
-      <div class="section-line"></div>
+      <span class="section-num">Section 02</span>
     </div>
     <div class="experience-list">
 
@@ -526,7 +646,7 @@
             <li>Instrumented SLIs/SLOs for 20+ applications in partnership with development teams.</li>
             <li>Developed incident correlation Bash tool that reduced MTTR by 90–99%.</li>
             <li>Implemented Azure VMs, Virtual Networks, and Azure AD for enterprise authentication across workloads.</li>
-            <li>Created a knowledge management desktop application using Microsoft PowerApps, reducing MTTR through solution re-use.</li>
+            <li>Created a knowledge management application using Microsoft PowerApps, reducing MTTR through solution re-use.</li>
           </ul>
           <div class="exp-tech">
             <span class="tech-pill">Azure</span><span class="tech-pill">Bash</span><span class="tech-pill">Datadog</span>
@@ -585,7 +705,7 @@
         <div class="exp-right">
           <div class="exp-role">Production Support Analyst</div>
           <ul class="exp-bullets">
-            <li>Managed onboarding of institutional and retail clients to the electronic trading platform, validating equities, derivatives, futures and options using FIX Protocol.</li>
+            <li>Managed onboarding of institutional and retail clients to the electronic trading platform using FIX Protocol.</li>
             <li>Wrote system health monitoring and alerting scripts; ensured overnight batch processes ran as scheduled using Autosys.</li>
             <li>Utilized C++, Perl, XML, SQL and SOAP to analyse trade flows and resolve production issues.</li>
           </ul>
@@ -604,41 +724,40 @@
 <!-- KEY INNOVATIONS -->
 <section id="innovations">
   <div class="section-wrap">
-    <div class="section-header">
-      <span class="section-num">03</span>
+    <div class="section-masthead">
       <h2 class="section-title">Key Innovations</h2>
-      <div class="section-line"></div>
+      <span class="section-num">Section 03</span>
     </div>
     <div class="innovations-grid">
       <div class="innovation-card">
         <div class="innovation-num">01</div>
         <div class="innovation-title">Incident Correlation Tool</div>
-        <div class="innovation-desc">Developed a tool to correlate application outages with maintenance events, reducing mean time to resolution by 90–99%.</div>
+        <div class="innovation-desc">Correlated application outages with maintenance events, reducing MTTR by 90–99%.</div>
       </div>
       <div class="innovation-card">
         <div class="innovation-num">02</div>
         <div class="innovation-title">Plaintext Password Obfuscation</div>
-        <div class="innovation-desc">Engineered a process for hiding plaintext passwords in config files using Ansible Vault, Jinja2, and Bash — eliminating a critical security exposure.</div>
+        <div class="innovation-desc">Engineered a secure process using Ansible Vault, Jinja2, and Bash — eliminating a critical security exposure in production config files.</div>
       </div>
       <div class="innovation-card">
         <div class="innovation-num">03</div>
         <div class="innovation-title">Access Management Dashboard</div>
-        <div class="innovation-desc">Architected a Python dashboard using NumPy and Pandas, reducing manual managerial effort by 90% through instant visibility into team-wide permission requirements.</div>
+        <div class="innovation-desc">Python dashboard using NumPy and Pandas, reducing manual managerial effort by 90% through instant permission visibility.</div>
       </div>
       <div class="innovation-card">
         <div class="innovation-num">04</div>
         <div class="innovation-title">Website Health Auto-Healing</div>
-        <div class="innovation-desc">Implemented a script to continuously monitor website status and automatically initiate recovery actions — reducing human response time to zero for common failure modes.</div>
+        <div class="innovation-desc">Continuous monitoring script with automatic recovery actions — reducing human response time to zero for common failure modes.</div>
       </div>
       <div class="innovation-card">
         <div class="innovation-num">05</div>
         <div class="innovation-title">Automated Alarm Monitoring</div>
-        <div class="innovation-desc">Developed a script to emulate a network agent by extracting alarm logs from vendor equipment and integrating them into the NMS for real-time visibility.</div>
+        <div class="innovation-desc">Network agent emulation script extracting alarm logs from vendor equipment and integrating into NMS for real-time visibility.</div>
       </div>
       <div class="innovation-card">
         <div class="innovation-num">06</div>
         <div class="innovation-title">Knowledge Management Tool</div>
-        <div class="innovation-desc">Created a desktop application using Microsoft PowerApps enabling engineers to document and share incident solutions, driving solution re-use and reducing MTTR.</div>
+        <div class="innovation-desc">Microsoft PowerApps desktop application enabling engineers to document and share incident solutions, measurably reducing MTTR.</div>
       </div>
     </div>
   </div>
@@ -649,34 +768,33 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-wrap">
-    <div class="section-header">
-      <span class="section-num">04</span>
+    <div class="section-masthead">
       <h2 class="section-title">Open Source Projects</h2>
-      <div class="section-line"></div>
+      <span class="section-num">Section 04</span>
     </div>
     <div class="projects-grid">
       <a class="project-card featured" href="https://github.com/oludevops" target="_blank">
-        <div class="proj-header"><span></span><span class="proj-status status-building" style="border-color:rgba(247,246,242,0.3);color:rgba(247,246,242,0.7)">Building</span></div>
+        <div class="proj-header"><span></span><span class="proj-status" style="border-color:rgba(250,250,248,0.3);color:rgba(250,250,248,0.6);font-family:'DM Mono',monospace;font-size:8px;padding:2px 8px;letter-spacing:1px">Building</span></div>
         <div class="proj-name">go-health-checker</div>
-        <div class="proj-desc">CLI tool in Go that monitors HTTP/HTTPS endpoints, measures latency, checks SSL certificate expiry, and outputs structured JSON for Dynatrace BizEvent ingestion.</div>
+        <div class="proj-desc">CLI tool in Go monitoring HTTP/HTTPS endpoints, measuring latency, checking SSL expiry, and outputting structured JSON for Dynatrace BizEvent ingestion.</div>
         <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-go"></span>Go</span><span class="proj-arrow">↗</span></div>
       </a>
       <a class="project-card" href="https://github.com/oludevops/plaintext-password-obfuscation" target="_blank">
         <div class="proj-header"><span></span><span class="proj-status status-live">Live</span></div>
         <div class="proj-name">plaintext-password-obfuscation</div>
-        <div class="proj-desc">Secure process for hiding plaintext passwords in config files using Ansible Vault, Jinja2, and Bash — eliminating critical security exposure in production environments.</div>
+        <div class="proj-desc">Secure process for hiding plaintext passwords in config files using Ansible Vault, Jinja2, and Bash — eliminating critical security exposure in production.</div>
         <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-dt"></span>Ansible Vault · Jinja2 · Bash</span><span class="proj-arrow">↗</span></div>
       </a>
       <a class="project-card" href="https://github.com/oludevops" target="_blank">
         <div class="proj-header"><span></span><span class="proj-status status-wip">In Progress</span></div>
         <div class="proj-name">k8s-observability-dashboard</div>
-        <div class="proj-desc">Dynatrace Gen3 dashboard built with DQL for real-time Kubernetes namespace observability — pod health, resource saturation, and SLO burn rates across clusters.</div>
+        <div class="proj-desc">Dynatrace Gen3 dashboard with DQL for real-time Kubernetes namespace observability — pod health, resource saturation, and SLO burn rates.</div>
         <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-dt"></span>DQL · Dynatrace</span><span class="proj-arrow">↗</span></div>
       </a>
       <a class="project-card" href="https://github.com/oludevops" target="_blank">
         <div class="proj-header"><span></span><span class="proj-status status-planned">Planned</span></div>
         <div class="proj-name">otel-pipeline-configs</div>
-        <div class="proj-desc">Production-grade OpenTelemetry collector configurations for filtering, transforming, and deduplicating logs, traces, and metrics — reducing egress costs in cloud environments.</div>
+        <div class="proj-desc">Production-grade OpenTelemetry collector configurations for filtering, transforming, and deduplicating telemetry — reducing egress costs in cloud environments.</div>
         <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-tf"></span>OpenTelemetry · YAML</span><span class="proj-arrow">↗</span></div>
       </a>
     </div>
@@ -691,10 +809,9 @@
 <!-- CERTIFICATIONS -->
 <section id="certs">
   <div class="section-wrap">
-    <div class="section-header">
-      <span class="section-num">05</span>
+    <div class="section-masthead">
       <h2 class="section-title">Certifications</h2>
-      <div class="section-line"></div>
+      <span class="section-num">Section 05</span>
     </div>
     <div class="certs-grid">
       <div class="cert-card">
@@ -730,40 +847,44 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-wrap">
-    <div class="section-header">
-      <span class="section-num">06</span>
+    <div class="section-masthead">
       <h2 class="section-title">Get In Touch</h2>
-      <div class="section-line"></div>
+      <span class="section-num">Section 06</span>
     </div>
-    <div class="contact-wrap">
+    <div class="contact-grid">
       <div class="contact-left">
         <h3>Let's build<br>something<br><em>reliable.</em></h3>
         <p>Open to SRE, Platform Engineering, and Cloud Engineering roles — particularly in financial services or cloud-native environments. Bilingual in English and French. Based in North York, Ontario.</p>
       </div>
-      <div class="contact-links">
-        <a href="mailto:oludevops@outlook.com" class="contact-link">
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">oludevops@outlook.com</span>
-          <span class="contact-link-arrow">↗</span>
-        </a>
-        <a href="https://www.linkedin.com/in/dolapol/" target="_blank" class="contact-link">
-          <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-value">linkedin.com/in/dolapol</span>
-          <span class="contact-link-arrow">↗</span>
-        </a>
-        <a href="https://github.com/oludevops" target="_blank" class="contact-link">
-          <span class="contact-link-label">GitHub</span>
-          <span class="contact-link-value">github.com/oludevops</span>
-          <span class="contact-link-arrow">↗</span>
-        </a>
+      <div class="contact-col-divider"></div>
+      <div class="contact-right">
+        <div class="contact-links">
+          <a href="mailto:oludevops@outlook.com" class="contact-link">
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value">oludevops@outlook.com</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/dolapol/" target="_blank" class="contact-link">
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">linkedin.com/in/dolapol</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="https://github.com/oludevops" target="_blank" class="contact-link">
+            <span class="contact-link-label">GitHub</span>
+            <span class="contact-link-value">github.com/oludevops</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<hr class="divider-bold"/>
+
 <footer>
-  <span class="footer-text">© 2025 <span>Olu Lawrence</span> — Site Reliability & Cloud Engineer</span>
-  <span class="footer-text">oludevops.github.io</span>
+  <span class="footer-text">© 2025 Olu Lawrence · Site Reliability & Cloud Engineer · North York, ON</span>
+  <span class="footer-masthead">oludevops.github.io</span>
 </footer>
 
 </body>
