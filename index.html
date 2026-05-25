@@ -18,13 +18,9 @@
     --accent: #38bdf8;
     --accent2: #34d399;
     --accent3: #f472b6;
-    --go: #00add8;
-    --dt: #00b4a0;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--bg);
     color: var(--text);
@@ -33,8 +29,6 @@
     line-height: 1.7;
     overflow-x: hidden;
   }
-
-  /* Grid background */
   body::before {
     content: '';
     position: fixed;
@@ -46,401 +40,216 @@
     pointer-events: none;
     z-index: 0;
   }
-
-  /* Glow orbs */
-  .orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-    z-index: 0;
-  }
+  .orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
   .orb-1 { width: 500px; height: 500px; background: rgba(56,189,248,0.07); top: -150px; right: -100px; }
   .orb-2 { width: 400px; height: 400px; background: rgba(52,211,153,0.05); bottom: 10%; left: -100px; }
 
-  /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
     padding: 20px 48px;
-    background: rgba(5,8,16,0.8);
+    background: rgba(5,8,16,0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 2px;
-    text-decoration: none;
-  }
+  .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 2px; text-decoration: none; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
+  .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--accent); }
 
-  /* SECTIONS */
   section { position: relative; z-index: 1; }
 
-  /* HERO */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 120px 48px 80px;
-    max-width: 1100px;
-    margin: 0 auto;
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 48px 80px; max-width: 1100px; margin: 0 auto;
   }
   .hero-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent2);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.2s;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent2);
+    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.2s;
   }
-  .pulse-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--accent2);
-    animation: pulse 2s ease-in-out infinite;
-  }
+  .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); animation: pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
 
   .hero-name {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(52px, 8vw, 96px);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -3px;
-    margin-bottom: 8px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.35s;
+    font-family: 'Syne', sans-serif; font-size: clamp(52px, 8vw, 96px);
+    font-weight: 800; line-height: 0.95; letter-spacing: -3px; margin-bottom: 8px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
   }
   .hero-name .first { color: var(--text); }
   .hero-name .last { color: var(--accent); }
-
   .hero-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(18px, 3vw, 28px);
-    font-weight: 400;
-    color: var(--muted);
-    letter-spacing: -0.5px;
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.5s;
+    font-family: 'Syne', sans-serif; font-size: clamp(18px, 3vw, 28px);
+    font-weight: 400; color: var(--muted); letter-spacing: -0.5px; margin-bottom: 12px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
   }
-
-  .hero-desc {
-    font-size: 16px;
-    color: #94a3b8;
-    max-width: 520px;
-    line-height: 1.8;
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.65s;
+  .hero-summary {
+    font-size: 15px; color: #94a3b8; max-width: 600px; line-height: 1.8; margin-bottom: 40px;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.6s;
   }
-
+  .hero-summary strong { color: var(--text); font-weight: 500; }
   .hero-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.8s;
+    display: flex; gap: 16px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.75s;
   }
   .btn-primary {
-    padding: 12px 28px;
-    background: var(--accent);
-    color: #050810;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all 0.2s;
+    padding: 12px 28px; background: var(--accent); color: #050810;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 1px; text-decoration: none; border-radius: 4px; transition: all 0.2s;
   }
   .btn-primary:hover { background: #7dd3fc; transform: translateY(-1px); }
   .btn-outline {
-    padding: 12px 28px;
-    border: 1px solid var(--border-accent);
-    color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all 0.2s;
+    padding: 12px 28px; border: 1px solid var(--border-accent); color: var(--accent);
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1px;
+    text-decoration: none; border-radius: 4px; transition: all 0.2s;
   }
   .btn-outline:hover { background: rgba(56,189,248,0.08); transform: translateY(-1px); }
 
-  .tech-strip {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 56px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.95s;
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s ease forwards 0.9s;
   }
-  .tech-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    padding: 5px 12px;
-    border-radius: 3px;
-    letter-spacing: 1px;
-    border: 1px solid;
-  }
-  .tag-go { border-color: rgba(0,173,216,0.4); color: #00add8; background: rgba(0,173,216,0.06); }
-  .tag-dt { border-color: rgba(0,180,160,0.4); color: #00b4a0; background: rgba(0,180,160,0.06); }
-  .tag-k8s { border-color: rgba(100,116,255,0.4); color: #818cf8; background: rgba(100,116,255,0.06); }
-  .tag-cloud { border-color: rgba(251,146,60,0.4); color: #fb923c; background: rgba(251,146,60,0.06); }
-  .tag-sre { border-color: rgba(244,114,182,0.4); color: #f472b6; background: rgba(244,114,182,0.06); }
+  .hero-stat-num { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; color: var(--accent); line-height: 1; }
+  .hero-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
 
-  @keyframes fadeUp {
-    from { opacity:0; transform: translateY(20px); }
-    to   { opacity:1; transform: translateY(0); }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+  .section-wrap { max-width: 1100px; margin: 0 auto; padding: 80px 48px; }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+  .section-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); opacity: 0.6; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -1px; }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .skill-group {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 24px; transition: border-color 0.2s;
+  }
+  .skill-group:hover { border-color: var(--border-accent); }
+  .skill-group-title {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .skill-list { display: flex; flex-direction: column; gap: 9px; }
+  .skill-item { display: flex; align-items: center; gap: 10px; }
+  .skill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .skill-dot.green { background: var(--accent2); }
+  .skill-dot.orange { background: #fb923c; }
+  .skill-dot.pink { background: var(--accent3); }
+  .skill-name { font-size: 13px; color: #94a3b8; }
+
+  /* EXPERIENCE */
+  .experience-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 32px; padding: 36px 0; border-bottom: 1px solid var(--border);
+  }
+  .exp-item:first-child { padding-top: 0; }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-left { padding-top: 4px; }
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted);
+    letter-spacing: 1px; margin-bottom: 8px;
+  }
+  .exp-company { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 2px; }
+  .exp-client { font-size: 12px; color: var(--muted); }
+  .exp-location { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #475569; margin-top: 6px; }
+  .exp-right {}
+  .exp-role { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .exp-bullets li { display: flex; gap: 10px; font-size: 13px; color: #94a3b8; line-height: 1.6; }
+  .exp-bullets li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 3px; }
+  .exp-tech {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;
+  }
+  .tech-pill {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 3px 8px;
+    border-radius: 3px; background: rgba(56,189,248,0.06);
+    border: 1px solid rgba(56,189,248,0.15); color: #64748b; letter-spacing: 0.5px;
   }
 
-  /* SECTION WRAPPER */
-  .section-wrap {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 80px 48px;
+  /* INNOVATIONS */
+  .innovations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .innovation-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 22px; transition: all 0.2s;
   }
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 48px;
-  }
-  .section-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    opacity: 0.6;
-  }
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -1px;
-  }
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-  .about-text p {
-    color: #94a3b8;
-    margin-bottom: 16px;
-    font-size: 15px;
-    line-height: 1.8;
-  }
-  .about-text p strong { color: var(--text); font-weight: 500; }
-  .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px;
-    transition: border-color 0.2s;
-  }
-  .stat-card:hover { border-color: var(--border-accent); }
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .stat-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+  .innovation-card:hover { border-color: var(--border-accent); transform: translateY(-2px); }
+  .innovation-icon { font-size: 20px; margin-bottom: 10px; }
+  .innovation-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .innovation-desc { font-size: 12px; color: #64748b; line-height: 1.6; }
 
   /* PROJECTS */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 28px;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
-    text-decoration: none;
-    display: block;
-    color: inherit;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 28px; transition: all 0.25s; position: relative; overflow: hidden;
+    text-decoration: none; display: block; color: inherit;
   }
   .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
     background: linear-gradient(90deg, var(--accent), transparent);
-    opacity: 0;
-    transition: opacity 0.25s;
+    opacity: 0; transition: opacity 0.25s;
   }
   .project-card:hover { border-color: var(--border-accent); transform: translateY(-3px); }
   .project-card:hover::before { opacity: 1; }
   .project-card.featured { border-color: rgba(56,189,248,0.2); }
   .project-card.featured::before { opacity: 0.5; }
-
   .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
   .proj-icon { font-size: 22px; }
-  .proj-status {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    padding: 3px 8px;
-    border-radius: 3px;
-    letter-spacing: 1px;
-  }
+  .proj-status { font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 3px 8px; border-radius: 3px; letter-spacing: 1px; }
   .status-building { background: rgba(251,146,60,0.1); border: 1px solid rgba(251,146,60,0.3); color: #fb923c; }
   .status-planned { background: rgba(100,116,255,0.1); border: 1px solid rgba(100,116,255,0.3); color: #818cf8; }
   .status-wip { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); color: #34d399; }
-
-  .proj-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
+  .proj-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
   .proj-desc { font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 20px; }
   .proj-footer { display: flex; justify-content: space-between; align-items: center; }
-  .proj-lang {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--go);
-    display: flex; align-items: center; gap: 6px;
-  }
+  .proj-lang { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #00add8; display: flex; align-items: center; gap: 6px; }
   .lang-dot { width: 7px; height: 7px; border-radius: 50%; }
   .dot-go { background: #00add8; }
+  .dot-py { background: #f472b6; }
   .dot-dt { background: #00b4a0; }
-  .dot-yaml { background: #f472b6; }
-  .dot-sh { background: #fb923c; }
+  .dot-tf { background: #818cf8; }
   .proj-arrow { color: var(--muted); font-size: 16px; transition: transform 0.2s; }
   .project-card:hover .proj-arrow { transform: translate(3px,-3px); color: var(--accent); }
-
   .projects-note {
-    margin-top: 24px;
-    padding: 16px 20px;
-    background: rgba(56,189,248,0.04);
-    border: 1px solid rgba(56,189,248,0.12);
-    border-radius: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.5px;
+    margin-top: 24px; padding: 16px 20px;
+    background: rgba(56,189,248,0.04); border: 1px solid rgba(56,189,248,0.12);
+    border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--muted); letter-spacing: 0.5px;
   }
   .projects-note span { color: var(--accent); }
 
-  /* SKILLS */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+  /* CERTS */
+  .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .cert-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 18px 20px; transition: border-color 0.2s;
   }
-  .skill-group {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 24px;
-    transition: border-color 0.2s;
-  }
-  .skill-group:hover { border-color: var(--border-accent); }
-  .skill-group-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--accent);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .skill-list { display: flex; flex-direction: column; gap: 10px; }
-  .skill-item { display: flex; align-items: center; gap: 10px; }
-  .skill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-  .skill-dot.dt { background: var(--dt); }
-  .skill-dot.cloud { background: #fb923c; }
-  .skill-dot.sre { background: var(--accent2); }
-  .skill-name { font-size: 13px; color: #94a3b8; }
+  .cert-card:hover { border-color: var(--border-accent); }
+  .cert-icon { font-size: 18px; margin-bottom: 8px; }
+  .cert-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; line-height: 1.4; }
+  .cert-issuer { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.5px; }
 
   /* CONTACT */
-  .contact-wrap {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-  }
-  .contact-left h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .contact-left h3 { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; letter-spacing: -2px; line-height: 1.1; margin-bottom: 16px; }
   .contact-left h3 em { color: var(--accent); font-style: normal; }
   .contact-left p { color: #64748b; font-size: 14px; line-height: 1.7; }
   .contact-links { display: flex; flex-direction: column; gap: 12px; }
   .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s;
+    display: flex; align-items: center; gap: 16px; padding: 16px 20px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    text-decoration: none; color: inherit; transition: all 0.2s;
   }
   .contact-link:hover { border-color: var(--border-accent); transform: translateX(4px); }
   .contact-link-icon {
-    width: 36px; height: 36px;
-    border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
+    width: 36px; height: 36px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
   }
   .icon-email { background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.2); }
   .icon-linkedin { background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2); }
@@ -449,37 +258,23 @@
   .contact-link-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
   .contact-link-value { font-size: 13px; color: var(--text); margin-top: 2px; }
 
-  /* FOOTER */
   footer {
-    border-top: 1px solid var(--border);
-    padding: 24px 48px;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border-top: 1px solid var(--border); padding: 24px 48px;
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
   }
-  .footer-text {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
-  }
+  .footer-text { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 1px; }
   .footer-text span { color: var(--accent); }
 
-  /* DIVIDER */
-  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
-
-  /* RESPONSIVE */
   @media (max-width: 768px) {
     nav { padding: 16px 24px; }
-    .nav-links { gap: 20px; }
+    .nav-links { gap: 16px; }
     .hero { padding: 100px 24px 60px; }
     .section-wrap { padding: 60px 24px; }
-    .about-grid, .contact-wrap { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .hero-name { letter-spacing: -2px; }
+    .skills-grid, .certs-grid { grid-template-columns: 1fr; }
+    .innovations-grid, .projects-grid, .contact-wrap { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    .hero-stats { gap: 24px; }
     footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
   }
 </style>
@@ -489,13 +284,12 @@
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">olu@lawrence:~$</a>
   <ul class="nav-links">
     <li><a href="#about">about</a></li>
+    <li><a href="#experience">experience</a></li>
     <li><a href="#projects">projects</a></li>
-    <li><a href="#skills">skills</a></li>
     <li><a href="#contact">contact</a></li>
   </ul>
 </nav>
@@ -505,76 +299,271 @@
   <div class="hero">
     <div class="hero-eyebrow">
       <span class="pulse-dot"></span>
-      open to new opportunities
+      open to new opportunities · North York, Ontario
     </div>
     <h1 class="hero-name">
       <span class="first">Olu</span><br>
       <span class="last">Lawrence</span>
     </h1>
     <p class="hero-title">Site Reliability & Cloud Engineer</p>
-    <p class="hero-desc">
-      I build and maintain the infrastructure that keeps systems observable, resilient, and fast.
-      Specializing in Dynatrace observability, Kubernetes, and cloud-native tooling — currently learning Go to build better DevOps tooling.
+    <p class="hero-summary">
+      <strong>10+ years</strong> building resilient infrastructure across financial services (Fidelity, Citibank, Morgan Stanley) and telecoms (Rogers, T-Mobile, Verizon). Deep expertise in <strong>cloud-native SRE</strong>, Kubernetes, and enterprise observability — reducing MTTR by up to <strong>99%</strong> and automating operational overhead by <strong>70%+</strong>.
     </p>
     <div class="hero-actions">
-      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#experience" class="btn-primary">View Experience</a>
       <a href="#contact" class="btn-outline">Get in Touch</a>
     </div>
-    <div class="tech-strip">
-      <span class="tech-tag tag-go">Go / Golang</span>
-      <span class="tech-tag tag-dt">Dynatrace · DQL · BizEvents</span>
-      <span class="tech-tag tag-k8s">Kubernetes · SRG</span>
-      <span class="tech-tag tag-cloud">AWS · Azure · GCP</span>
-      <span class="tech-tag tag-sre">SRE · Observability</span>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">10+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">99%</div>
+        <div class="hero-stat-label">MTTR Reduction</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">50+</div>
+        <div class="hero-stat-label">SLO Frameworks Built</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">70%+</div>
+        <div class="hero-stat-label">Ops Overhead Automated</div>
+      </div>
     </div>
   </div>
 </section>
 
 <hr class="divider"/>
 
-<!-- ABOUT -->
+<!-- SKILLS -->
 <section id="about">
   <div class="section-wrap">
     <div class="section-header">
       <span class="section-num">01</span>
-      <h2 class="section-title">About Me</h2>
+      <h2 class="section-title">Core Competencies</h2>
       <div class="section-line"></div>
     </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>
-          I'm <strong>Olu Lawrence</strong>, a Site Reliability and Cloud Engineer passionate about building observable,
-          resilient, and scalable infrastructure. My work lives at the intersection of cloud engineering,
-          automation, and deep system observability.
-        </p>
-        <p>
-          I have hands-on experience with <strong>Dynatrace</strong> — including DQL, Gen3 dashboards,
-          Traces on Grail, ActiveGate/Plugins, SRG/Workflow development, and BizEvents — giving me a
-          strong foundation in enterprise observability at scale.
-        </p>
-        <p>
-          I'm currently learning <strong>Go (Golang)</strong> to build CLI tools and backend services
-          that automate common SRE tasks — from health checking and log parsing to Kubernetes
-          controller patterns. My goal: write the tools I wish existed.
-        </p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">// Cloud & Infrastructure</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot orange"></span><span class="skill-name">AWS (EKS, Aurora, DynamoDB, EC2)</span></div>
+          <div class="skill-item"><span class="skill-dot orange"></span><span class="skill-name">Microsoft Azure (VMs, AD, AZ-104)</span></div>
+          <div class="skill-item"><span class="skill-dot orange"></span><span class="skill-name">Google Cloud (GKE, Log Explorer)</span></div>
+          <div class="skill-item"><span class="skill-dot orange"></span><span class="skill-name">Kubernetes, OpenShift, Docker</span></div>
+          <div class="skill-item"><span class="skill-dot orange"></span><span class="skill-name">Terraform, Ansible, Helm, GitOps</span></div>
+        </div>
       </div>
-      <div class="about-stats">
-        <div class="stat-card">
-          <div class="stat-num">SRE</div>
-          <div class="stat-label">Primary Role</div>
+      <div class="skill-group">
+        <div class="skill-group-title">// Observability</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Dynatrace (DQL, Gen3, Grail, BizEvents)</span></div>
+          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">OpenTelemetry pipelines</span></div>
+          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Datadog, Prometheus, Grafana</span></div>
+          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Splunk, AppDynamics, Geneos ITRS</span></div>
+          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">SLI / SLO / Error Budget frameworks</span></div>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">Go</div>
-          <div class="stat-label">Learning Now</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">// Engineering & Automation</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">Python, Bash, Perl, Java, C++</span></div>
+          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">Go (Golang) — actively learning</span></div>
+          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">CI/CD · Jenkins · GitHub Actions</span></div>
+          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">Kafka, Redis, PostgreSQL, MongoDB</span></div>
+          <div class="skill-item"><span class="skill-dot green"></span><span class="skill-name">FIX Protocol, Blockchain</span></div>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">DQL</div>
-          <div class="stat-label">Dynatrace Expert</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="experience-list">
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-date">08/2025 – 02/2026</div>
+          <div class="exp-company">S.I. Systems</div>
+          <div class="exp-client">@ Tangerine Bank</div>
+          <div class="exp-location">North York, ON</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">K8s</div>
-          <div class="stat-label">Container Orchestration</div>
+        <div class="exp-right">
+          <div class="exp-role">Lead Site Reliability Engineer</div>
+          <ul class="exp-bullets">
+            <li>Managed digital banking applications on GKE, ensuring 99.9%+ uptime across all production workloads.</li>
+            <li>Created and implemented key observability metrics, SLOs/SLIs, and dashboards in Dynatrace and GCP Log Explorer.</li>
+            <li>Led migration of Dynatrace from on-premises to cloud-based model, improving scalability and reducing operational overhead.</li>
+            <li>Engineered custom OpenTelemetry pipelines to filter, transform, and deduplicate logs, traces, and metrics — reducing egress costs.</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tech-pill">GKE</span><span class="tech-pill">Dynatrace</span><span class="tech-pill">OpenTelemetry</span>
+            <span class="tech-pill">Terraform</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">Python</span><span class="tech-pill">Bash</span>
+          </div>
         </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-date">01/2024 – 05/2025</div>
+          <div class="exp-company">Insight Global</div>
+          <div class="exp-client">@ Fidelity Investments</div>
+          <div class="exp-location">Jacksonville, FL</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">SRE & Principal Software Engineer</div>
+          <ul class="exp-bullets">
+            <li>Maintained Java-based equity and digital asset trading applications on AWS EKS, supporting millions of daily transactions.</li>
+            <li>Automated monthly EC2 instance rehydration using Terraform, reducing manual overhead by 70%+ and enforcing infrastructure consistency.</li>
+            <li>Instrumented SLIs/SLOs for 50+ applications; configured synthetic monitoring using Catchpoint and Datadog.</li>
+            <li>Led SRE huddles for equity and digital asset trading platforms, overseeing triage and resolution tracking.</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tech-pill">AWS EKS</span><span class="tech-pill">Terraform</span><span class="tech-pill">Datadog</span>
+            <span class="tech-pill">Kafka</span><span class="tech-pill">Java</span><span class="tech-pill">Python</span><span class="tech-pill">FIX Protocol</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-date">04/2021 – 06/2023</div>
+          <div class="exp-company">Spectraforce</div>
+          <div class="exp-client">@ Fidelity Investments</div>
+          <div class="exp-location">Jacksonville, FL</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">SRE & Software Engineer</div>
+          <ul class="exp-bullets">
+            <li>Instrumented SLIs/SLOs for 20+ applications in partnership with development teams, establishing measurable reliability targets.</li>
+            <li>Developed incident correlation Bash tool that reduced MTTR by 90–99%.</li>
+            <li>Implemented Azure VMs, Virtual Networks, and Azure AD for enterprise authentication across workloads.</li>
+            <li>Created a knowledge management desktop application using Microsoft PowerApps, reducing MTTR through solution re-use.</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tech-pill">Azure</span><span class="tech-pill">Bash</span><span class="tech-pill">Datadog</span>
+            <span class="tech-pill">Splunk</span><span class="tech-pill">Prometheus</span><span class="tech-pill">Grafana</span><span class="tech-pill">Terraform</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-date">04/2017 – 08/2018</div>
+          <div class="exp-company">Citibank</div>
+          <div class="exp-client">Citi Canada Technology</div>
+          <div class="exp-location">Mississauga, ON</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Application Support Engineer</div>
+          <ul class="exp-bullets">
+            <li>Supported High Touch equities trading and reporting applications in Java, ensuring continuous reliable operation.</li>
+            <li>Elevated application monitoring from Level 4 to Level 5 by implementing Geneos ITRS dashboards and real-time alerting.</li>
+            <li>Deployed code changes using IBM Urban Code Deploy following standard change management and DevOps standards.</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tech-pill">Java</span><span class="tech-pill">Geneos ITRS</span><span class="tech-pill">Linux</span>
+            <span class="tech-pill">FIX Protocol</span><span class="tech-pill">Sybase</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-date">04/2015 – 07/2016</div>
+          <div class="exp-company">Rogers Communications</div>
+          <div class="exp-client">Canada's largest telco</div>
+          <div class="exp-location">Brampton, ON</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Senior System Administrator</div>
+          <ul class="exp-bullets">
+            <li>Maintained Red Hat Linux, Solaris Unix, and Windows servers supporting high-traffic network management systems.</li>
+            <li>Developed a Bash script that improved network statistics collection efficiency by 99.999%, eliminating manual data gathering.</li>
+            <li>Administered Oracle 11g and Sybase databases; produced network statistics reports using SQL.</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tech-pill">Linux</span><span class="tech-pill">Oracle DB</span><span class="tech-pill">Bash</span>
+            <span class="tech-pill">WebLogic</span><span class="tech-pill">Tomcat</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-date">06/2012 – 11/2014</div>
+          <div class="exp-company">Michael Page</div>
+          <div class="exp-client">@ Morgan Stanley</div>
+          <div class="exp-location">Montreal, QC</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Production Support Analyst</div>
+          <ul class="exp-bullets">
+            <li>Managed onboarding of institutional and retail clients to the electronic trading platform, validating equities, derivatives, futures and options using FIX Protocol.</li>
+            <li>Wrote system health monitoring and alerting scripts; ensured overnight batch processes ran as scheduled using Autosys.</li>
+            <li>Utilized C++, Perl, XML, SQL and SOAP to analyse trade flows and resolve production issues.</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tech-pill">C++</span><span class="tech-pill">Perl</span><span class="tech-pill">Python</span>
+            <span class="tech-pill">FIX Protocol</span><span class="tech-pill">Autosys</span><span class="tech-pill">Git</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- KEY INNOVATIONS -->
+<section id="innovations">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Key Innovations</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="innovations-grid">
+      <div class="innovation-card">
+        <div class="innovation-icon">⚡</div>
+        <div class="innovation-title">Incident Correlation Tool</div>
+        <div class="innovation-desc">Developed a tool to correlate application outages with maintenance events, reducing mean time to resolution (MTTR) by 90–99%.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-icon">🔐</div>
+        <div class="innovation-title">Plaintext Password Obfuscation</div>
+        <div class="innovation-desc">Engineered a process for hiding plaintext passwords in config files using Ansible Vault, Jinja2, and Bash — eliminating a critical security exposure.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-icon">📊</div>
+        <div class="innovation-title">Access Management Dashboard</div>
+        <div class="innovation-desc">Architected a Python dashboard using NumPy and Pandas, reducing manual managerial effort by 90% through instant visibility into team-wide permission requirements.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-icon">🌐</div>
+        <div class="innovation-title">Website Health Auto-Healing</div>
+        <div class="innovation-desc">Implemented a script to continuously monitor website status and automatically initiate recovery actions — reducing human response time to zero for common failure modes.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-icon">📡</div>
+        <div class="innovation-title">Automated Alarm Monitoring</div>
+        <div class="innovation-desc">Developed a script to emulate a network agent by extracting alarm logs from vendor equipment and integrating them into the NMS — enabling real-time visibility and proactive fault monitoring.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-icon">💡</div>
+        <div class="innovation-title">Knowledge Management Tool</div>
+        <div class="innovation-desc">Created a desktop application using Microsoft PowerApps enabling engineers to document and share incident solutions, driving solution re-use and measurably reducing MTTR.</div>
       </div>
     </div>
   </div>
@@ -586,119 +575,82 @@
 <section id="projects">
   <div class="section-wrap">
     <div class="section-header">
-      <span class="section-num">02</span>
-      <h2 class="section-title">Projects</h2>
+      <span class="section-num">04</span>
+      <h2 class="section-title">Open Source Projects</h2>
       <div class="section-line"></div>
     </div>
     <div class="projects-grid">
-
       <a class="project-card featured" href="https://github.com/oludevops" target="_blank">
-        <div class="proj-header">
-          <span class="proj-icon">🔍</span>
-          <span class="proj-status status-building">Building</span>
-        </div>
+        <div class="proj-header"><span class="proj-icon">🔍</span><span class="proj-status status-building">Building</span></div>
         <div class="proj-name">go-health-checker</div>
-        <div class="proj-desc">
-          A CLI tool written in Go that monitors HTTP/HTTPS endpoints, measures latency, checks SSL certificate expiry, and outputs structured JSON — ready for ingestion into Dynatrace via BizEvents.
-        </div>
-        <div class="proj-footer">
-          <span class="proj-lang"><span class="lang-dot dot-go"></span>Go</span>
-          <span class="proj-arrow">↗</span>
-        </div>
+        <div class="proj-desc">CLI tool in Go that monitors HTTP/HTTPS endpoints, measures latency, checks SSL certificate expiry, and outputs structured JSON — ready for Dynatrace BizEvent ingestion.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-go"></span>Go</span><span class="proj-arrow">↗</span></div>
       </a>
-
       <a class="project-card" href="https://github.com/oludevops" target="_blank">
-        <div class="proj-header">
-          <span class="proj-icon">📤</span>
-          <span class="proj-status status-planned">Planned</span>
-        </div>
+        <div class="proj-header"><span class="proj-icon">📤</span><span class="proj-status status-planned">Planned</span></div>
         <div class="proj-name">dt-bizevent-exporter</div>
-        <div class="proj-desc">
-          Go service that parses structured application logs and forwards custom BizEvents to Dynatrace Grail. Configurable via YAML with field mapping, filtering, and retry logic.
-        </div>
-        <div class="proj-footer">
-          <span class="proj-lang"><span class="lang-dot dot-go"></span>Go · Dynatrace API</span>
-          <span class="proj-arrow">↗</span>
-        </div>
+        <div class="proj-desc">Go service that parses structured application logs and forwards custom BizEvents to Dynatrace Grail — configurable via YAML with field mapping, filtering, and retry logic.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-go"></span>Go · Dynatrace API</span><span class="proj-arrow">↗</span></div>
       </a>
-
       <a class="project-card" href="https://github.com/oludevops" target="_blank">
-        <div class="proj-header">
-          <span class="proj-icon">📊</span>
-          <span class="proj-status status-wip">In Progress</span>
-        </div>
+        <div class="proj-header"><span class="proj-icon">📊</span><span class="proj-status status-wip">In Progress</span></div>
         <div class="proj-name">k8s-observability-dashboard</div>
-        <div class="proj-desc">
-          Dynatrace Gen3 dashboard built with DQL for real-time Kubernetes namespace observability — tracking pod health, resource saturation, and SLO burn rates across clusters.
-        </div>
-        <div class="proj-footer">
-          <span class="proj-lang"><span class="lang-dot dot-dt"></span>DQL · Dynatrace</span>
-          <span class="proj-arrow">↗</span>
-        </div>
+        <div class="proj-desc">Dynatrace Gen3 dashboard built with DQL for real-time Kubernetes namespace observability — pod health, resource saturation, and SLO burn rates across clusters.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-dt"></span>DQL · Dynatrace</span><span class="proj-arrow">↗</span></div>
       </a>
-
       <a class="project-card" href="https://github.com/oludevops" target="_blank">
-        <div class="proj-header">
-          <span class="proj-icon">⚙️</span>
-          <span class="proj-status status-planned">Planned</span>
-        </div>
-        <div class="proj-name">srg-workflow-library</div>
-        <div class="proj-desc">
-          A reusable library of Dynatrace SRG workflow templates for automated release validation, canary analysis, and incident response — integrated with CI/CD pipelines via GitHub Actions.
-        </div>
-        <div class="proj-footer">
-          <span class="proj-lang"><span class="lang-dot dot-yaml"></span>Dynatrace · YAML · Go</span>
-          <span class="proj-arrow">↗</span>
-        </div>
+        <div class="proj-header"><span class="proj-icon">🔧</span><span class="proj-status status-planned">Planned</span></div>
+        <div class="proj-name">otel-pipeline-configs</div>
+        <div class="proj-desc">Production-grade OpenTelemetry collector configurations for filtering, transforming, and deduplicating logs, traces, and metrics — reducing egress costs in cloud environments.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-tf"></span>OpenTelemetry · YAML</span><span class="proj-arrow">↗</span></div>
       </a>
-
     </div>
     <div class="projects-note">
-      <span>// note:</span> projects marked "planned" or "building" are actively in development as part of my Go learning journey. Check back soon — or watch the GitHub repo for updates.
+      <span>// note:</span> Go projects are actively in development as part of an ongoing learning journey. Follow <a href="https://github.com/oludevops" style="color:var(--accent);text-decoration:none;">github.com/oludevops</a> for updates.
     </div>
   </div>
 </section>
 
 <hr class="divider"/>
 
-<!-- SKILLS -->
-<section id="skills">
+<!-- CERTIFICATIONS -->
+<section id="certs">
   <div class="section-wrap">
     <div class="section-header">
-      <span class="section-num">03</span>
-      <h2 class="section-title">Skills & Stack</h2>
+      <span class="section-num">05</span>
+      <h2 class="section-title">Certifications</h2>
       <div class="section-line"></div>
     </div>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <div class="skill-group-title">// Observability</div>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">Dynatrace (DQL, Gen3, Grail)</span></div>
-          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">BizEvents & Traces</span></div>
-          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">ActiveGate & Plugins</span></div>
-          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">SRG / Workflow Development</span></div>
-          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">Prometheus & Grafana</span></div>
-        </div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🟠</div>
+        <div class="cert-name">AWS Certified Solutions Architect Associate</div>
+        <div class="cert-issuer">Amazon Web Services · SAA-C03</div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">// Infrastructure</div>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">Kubernetes (K8s)</span></div>
-          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">Docker & Containerization</span></div>
-          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">AWS / Azure / GCP</span></div>
-          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">Terraform & IaC</span></div>
-          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">CI/CD · GitHub Actions</span></div>
-        </div>
+      <div class="cert-card">
+        <div class="cert-icon">🟠</div>
+        <div class="cert-name">AWS Certified Cloud Practitioner</div>
+        <div class="cert-issuer">Amazon Web Services · CLF-C01</div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">// Engineering</div>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Go (Golang) — learning</span></div>
-          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Python & Bash scripting</span></div>
-          <div class="skill-item"><span class="skill-dot sre"></span><span class="skill-name">SLOs / SLIs / Error Budgets</span></div>
-          <div class="skill-item"><span class="skill-dot sre"></span><span class="skill-name">Incident Management</span></div>
-          <div class="skill-item"><span class="skill-dot sre"></span><span class="skill-name">Chaos Engineering</span></div>
-        </div>
+      <div class="cert-card">
+        <div class="cert-icon">🎓</div>
+        <div class="cert-name">Certificate in Blockchain</div>
+        <div class="cert-issuer">Massachusetts Institute of Technology</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📈</div>
+        <div class="cert-name">Canadian Securities Course</div>
+        <div class="cert-issuer">Equivalent of US Series 7</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">⚙️</div>
+        <div class="cert-name">Foundation in ITRS Geneos</div>
+        <div class="cert-issuer">ITRS Group</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📋</div>
+        <div class="cert-name">IT Infrastructure Library</div>
+        <div class="cert-issuer">ITILv3 Foundation</div>
       </div>
     </div>
   </div>
@@ -710,7 +662,7 @@
 <section id="contact">
   <div class="section-wrap">
     <div class="section-header">
-      <span class="section-num">04</span>
+      <span class="section-num">06</span>
       <h2 class="section-title">Get In Touch</h2>
       <div class="section-line"></div>
     </div>
@@ -718,9 +670,7 @@
       <div class="contact-left">
         <h3>Let's build<br>something <em>reliable</em>.</h3>
         <p>
-          I'm currently open to SRE, Platform Engineering, and Cloud Engineering roles.
-          Whether you have a role in mind, want to collaborate on a project, or just want to talk
-          observability and Go — my inbox is open.
+          I'm open to SRE, Platform Engineering, and Cloud Engineering roles — particularly in financial services or cloud-native environments. Bilingual in English and French. Based in North York, Ontario.
         </p>
       </div>
       <div class="contact-links">
@@ -751,7 +701,7 @@
 </section>
 
 <footer>
-  <span class="footer-text">© 2025 <span>Olu Lawrence</span> — Built with HTML, CSS & intention.</span>
+  <span class="footer-text">© 2025 <span>Olu Lawrence</span> — SRE & Cloud Engineer</span>
   <span class="footer-text">oludevops.github.io</span>
 </footer>
 
