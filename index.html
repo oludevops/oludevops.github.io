@@ -204,7 +204,8 @@
   .proj-status { font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 3px 8px; border-radius: 3px; letter-spacing: 1px; }
   .status-building { background: rgba(251,146,60,0.1); border: 1px solid rgba(251,146,60,0.3); color: #fb923c; }
   .status-planned { background: rgba(100,116,255,0.1); border: 1px solid rgba(100,116,255,0.3); color: #818cf8; }
-  .status-wip { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); color: #34d399; }
+  .status-wip  { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); color: #34d399; }
+  .status-live { background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.5); color: #34d399; font-weight: 600; }
   .proj-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
   .proj-desc { font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 20px; }
   .proj-footer { display: flex; justify-content: space-between; align-items: center; }
@@ -586,11 +587,11 @@
         <div class="proj-desc">CLI tool in Go that monitors HTTP/HTTPS endpoints, measures latency, checks SSL certificate expiry, and outputs structured JSON — ready for Dynatrace BizEvent ingestion.</div>
         <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-go"></span>Go</span><span class="proj-arrow">↗</span></div>
       </a>
-      <a class="project-card" href="https://github.com/oludevops" target="_blank">
-        <div class="proj-header"><span class="proj-icon">📤</span><span class="proj-status status-planned">Planned</span></div>
-        <div class="proj-name">dt-bizevent-exporter</div>
-        <div class="proj-desc">Go service that parses structured application logs and forwards custom BizEvents to Dynatrace Grail — configurable via YAML with field mapping, filtering, and retry logic.</div>
-        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-go"></span>Go · Dynatrace API</span><span class="proj-arrow">↗</span></div>
+      <a class="project-card" href="https://github.com/oludevops/plaintext-password-obfuscation" target="_blank">
+        <div class="proj-header"><span class="proj-icon">🔐</span><span class="proj-status status-wip">Live</span></div>
+        <div class="proj-name">plaintext-password-obfuscation</div>
+        <div class="proj-desc">Engineered a secure process for hiding plaintext passwords in config files using Ansible Vault, Jinja2, and Bash — eliminating a critical security exposure in production environments.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-dt"></span>Ansible Vault · Jinja2 · Bash</span><span class="proj-arrow">↗</span></div>
       </a>
       <a class="project-card" href="https://github.com/oludevops" target="_blank">
         <div class="proj-header"><span class="proj-icon">📊</span><span class="proj-status status-wip">In Progress</span></div>
