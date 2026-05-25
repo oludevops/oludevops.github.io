@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Olu Lawrence — SRE & Cloud Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=JetBrains+Mono:wght@300;400;500&family=Figtree:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #050810;
+    --surface: #0b1120;
+    --surface2: #111827;
+    --border: rgba(255,255,255,0.07);
+    --border-accent: rgba(56,189,248,0.3);
+    --text: #f0f4ff;
+    --muted: #64748b;
+    --accent: #38bdf8;
+    --accent2: #34d399;
+    --accent3: #f472b6;
+    --go: #00add8;
+    --dt: #00b4a0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Figtree', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb-1 { width: 500px; height: 500px; background: rgba(56,189,248,0.07); top: -150px; right: -100px; }
+  .orb-2 { width: 400px; height: 400px; background: rgba(52,211,153,0.05); bottom: 10%; left: -100px; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(5,8,16,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+  .pulse-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.35s;
+  }
+  .hero-name .first { color: var(--text); }
+  .hero-name .last { color: var(--accent); }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: -0.5px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.5s;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: #94a3b8;
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.65s;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.8s;
+  }
+  .btn-primary {
+    padding: 12px 28px;
+    background: var(--accent);
+    color: #050810;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: #7dd3fc; transform: translateY(-1px); }
+  .btn-outline {
+    padding: 12px 28px;
+    border: 1px solid var(--border-accent);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: rgba(56,189,248,0.08); transform: translateY(-1px); }
+
+  .tech-strip {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 56px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.95s;
+  }
+  .tech-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    border: 1px solid;
+  }
+  .tag-go { border-color: rgba(0,173,216,0.4); color: #00add8; background: rgba(0,173,216,0.06); }
+  .tag-dt { border-color: rgba(0,180,160,0.4); color: #00b4a0; background: rgba(0,180,160,0.06); }
+  .tag-k8s { border-color: rgba(100,116,255,0.4); color: #818cf8; background: rgba(100,116,255,0.06); }
+  .tag-cloud { border-color: rgba(251,146,60,0.4); color: #fb923c; background: rgba(251,146,60,0.06); }
+  .tag-sre { border-color: rgba(244,114,182,0.4); color: #f472b6; background: rgba(244,114,182,0.06); }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(20px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  /* SECTION WRAPPER */
+  .section-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    opacity: 0.6;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .about-text p {
+    color: #94a3b8;
+    margin-bottom: 16px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .stat-card:hover { border-color: var(--border-accent); }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .project-card:hover { border-color: var(--border-accent); transform: translateY(-3px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-card.featured { border-color: rgba(56,189,248,0.2); }
+  .project-card.featured::before { opacity: 0.5; }
+
+  .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .proj-icon { font-size: 22px; }
+  .proj-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+  .status-building { background: rgba(251,146,60,0.1); border: 1px solid rgba(251,146,60,0.3); color: #fb923c; }
+  .status-planned { background: rgba(100,116,255,0.1); border: 1px solid rgba(100,116,255,0.3); color: #818cf8; }
+  .status-wip { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.3); color: #34d399; }
+
+  .proj-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .proj-desc { font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 20px; }
+  .proj-footer { display: flex; justify-content: space-between; align-items: center; }
+  .proj-lang {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--go);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .lang-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot-go { background: #00add8; }
+  .dot-dt { background: #00b4a0; }
+  .dot-yaml { background: #f472b6; }
+  .dot-sh { background: #fb923c; }
+  .proj-arrow { color: var(--muted); font-size: 16px; transition: transform 0.2s; }
+  .project-card:hover .proj-arrow { transform: translate(3px,-3px); color: var(--accent); }
+
+  .projects-note {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: rgba(56,189,248,0.04);
+    border: 1px solid rgba(56,189,248,0.12);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+  .projects-note span { color: var(--accent); }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+  .skill-group:hover { border-color: var(--border-accent); }
+  .skill-group-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-list { display: flex; flex-direction: column; gap: 10px; }
+  .skill-item { display: flex; align-items: center; gap: 10px; }
+  .skill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .skill-dot.dt { background: var(--dt); }
+  .skill-dot.cloud { background: #fb923c; }
+  .skill-dot.sre { background: var(--accent2); }
+  .skill-name { font-size: 13px; color: #94a3b8; }
+
+  /* CONTACT */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .contact-left h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .contact-left h3 em { color: var(--accent); font-style: normal; }
+  .contact-left p { color: #64748b; font-size: 14px; line-height: 1.7; }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--border-accent); transform: translateX(4px); }
+  .contact-link-icon {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .icon-email { background: rgba(244,114,182,0.1); border: 1px solid rgba(244,114,182,0.2); }
+  .icon-linkedin { background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2); }
+  .icon-github { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+  .contact-link-info { display: flex; flex-direction: column; }
+  .contact-link-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .contact-link-value { font-size: 13px; color: var(--text); margin-top: 2px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .footer-text span { color: var(--accent); }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { gap: 20px; }
+    .hero { padding: 100px 24px 60px; }
+    .section-wrap { padding: 60px 24px; }
+    .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-name { letter-spacing: -2px; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">olu@lawrence:~$</a>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero">
+    <div class="hero-eyebrow">
+      <span class="pulse-dot"></span>
+      open to new opportunities
+    </div>
+    <h1 class="hero-name">
+      <span class="first">Olu</span><br>
+      <span class="last">Lawrence</span>
+    </h1>
+    <p class="hero-title">Site Reliability & Cloud Engineer</p>
+    <p class="hero-desc">
+      I build and maintain the infrastructure that keeps systems observable, resilient, and fast.
+      Specializing in Dynatrace observability, Kubernetes, and cloud-native tooling — currently learning Go to build better DevOps tooling.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="tech-strip">
+      <span class="tech-tag tag-go">Go / Golang</span>
+      <span class="tech-tag tag-dt">Dynatrace · DQL · BizEvents</span>
+      <span class="tech-tag tag-k8s">Kubernetes · SRG</span>
+      <span class="tech-tag tag-cloud">AWS · Azure · GCP</span>
+      <span class="tech-tag tag-sre">SRE · Observability</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About Me</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm <strong>Olu Lawrence</strong>, a Site Reliability and Cloud Engineer passionate about building observable,
+          resilient, and scalable infrastructure. My work lives at the intersection of cloud engineering,
+          automation, and deep system observability.
+        </p>
+        <p>
+          I have hands-on experience with <strong>Dynatrace</strong> — including DQL, Gen3 dashboards,
+          Traces on Grail, ActiveGate/Plugins, SRG/Workflow development, and BizEvents — giving me a
+          strong foundation in enterprise observability at scale.
+        </p>
+        <p>
+          I'm currently learning <strong>Go (Golang)</strong> to build CLI tools and backend services
+          that automate common SRE tasks — from health checking and log parsing to Kubernetes
+          controller patterns. My goal: write the tools I wish existed.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">SRE</div>
+          <div class="stat-label">Primary Role</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">Go</div>
+          <div class="stat-label">Learning Now</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">DQL</div>
+          <div class="stat-label">Dynatrace Expert</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">K8s</div>
+          <div class="stat-label">Container Orchestration</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <a class="project-card featured" href="https://github.com/oludevops" target="_blank">
+        <div class="proj-header">
+          <span class="proj-icon">🔍</span>
+          <span class="proj-status status-building">Building</span>
+        </div>
+        <div class="proj-name">go-health-checker</div>
+        <div class="proj-desc">
+          A CLI tool written in Go that monitors HTTP/HTTPS endpoints, measures latency, checks SSL certificate expiry, and outputs structured JSON — ready for ingestion into Dynatrace via BizEvents.
+        </div>
+        <div class="proj-footer">
+          <span class="proj-lang"><span class="lang-dot dot-go"></span>Go</span>
+          <span class="proj-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/oludevops" target="_blank">
+        <div class="proj-header">
+          <span class="proj-icon">📤</span>
+          <span class="proj-status status-planned">Planned</span>
+        </div>
+        <div class="proj-name">dt-bizevent-exporter</div>
+        <div class="proj-desc">
+          Go service that parses structured application logs and forwards custom BizEvents to Dynatrace Grail. Configurable via YAML with field mapping, filtering, and retry logic.
+        </div>
+        <div class="proj-footer">
+          <span class="proj-lang"><span class="lang-dot dot-go"></span>Go · Dynatrace API</span>
+          <span class="proj-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/oludevops" target="_blank">
+        <div class="proj-header">
+          <span class="proj-icon">📊</span>
+          <span class="proj-status status-wip">In Progress</span>
+        </div>
+        <div class="proj-name">k8s-observability-dashboard</div>
+        <div class="proj-desc">
+          Dynatrace Gen3 dashboard built with DQL for real-time Kubernetes namespace observability — tracking pod health, resource saturation, and SLO burn rates across clusters.
+        </div>
+        <div class="proj-footer">
+          <span class="proj-lang"><span class="lang-dot dot-dt"></span>DQL · Dynatrace</span>
+          <span class="proj-arrow">↗</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/oludevops" target="_blank">
+        <div class="proj-header">
+          <span class="proj-icon">⚙️</span>
+          <span class="proj-status status-planned">Planned</span>
+        </div>
+        <div class="proj-name">srg-workflow-library</div>
+        <div class="proj-desc">
+          A reusable library of Dynatrace SRG workflow templates for automated release validation, canary analysis, and incident response — integrated with CI/CD pipelines via GitHub Actions.
+        </div>
+        <div class="proj-footer">
+          <span class="proj-lang"><span class="lang-dot dot-yaml"></span>Dynatrace · YAML · Go</span>
+          <span class="proj-arrow">↗</span>
+        </div>
+      </a>
+
+    </div>
+    <div class="projects-note">
+      <span>// note:</span> projects marked "planned" or "building" are actively in development as part of my Go learning journey. Check back soon — or watch the GitHub repo for updates.
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Skills & Stack</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">// Observability</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">Dynatrace (DQL, Gen3, Grail)</span></div>
+          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">BizEvents & Traces</span></div>
+          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">ActiveGate & Plugins</span></div>
+          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">SRG / Workflow Development</span></div>
+          <div class="skill-item"><span class="skill-dot dt"></span><span class="skill-name">Prometheus & Grafana</span></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">// Infrastructure</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">Kubernetes (K8s)</span></div>
+          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">Docker & Containerization</span></div>
+          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">AWS / Azure / GCP</span></div>
+          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">Terraform & IaC</span></div>
+          <div class="skill-item"><span class="skill-dot cloud"></span><span class="skill-name">CI/CD · GitHub Actions</span></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">// Engineering</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Go (Golang) — learning</span></div>
+          <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Python & Bash scripting</span></div>
+          <div class="skill-item"><span class="skill-dot sre"></span><span class="skill-name">SLOs / SLIs / Error Budgets</span></div>
+          <div class="skill-item"><span class="skill-dot sre"></span><span class="skill-name">Incident Management</span></div>
+          <div class="skill-item"><span class="skill-dot sre"></span><span class="skill-name">Chaos Engineering</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-left">
+        <h3>Let's build<br>something <em>reliable</em>.</h3>
+        <p>
+          I'm currently open to SRE, Platform Engineering, and Cloud Engineering roles.
+          Whether you have a role in mind, want to collaborate on a project, or just want to talk
+          observability and Go — my inbox is open.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:oludevops@outlook.com" class="contact-link">
+          <div class="contact-link-icon icon-email">✉️</div>
+          <div class="contact-link-info">
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value">oludevops@outlook.com</span>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/dolapol/" target="_blank" class="contact-link">
+          <div class="contact-link-icon icon-linkedin">💼</div>
+          <div class="contact-link-info">
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">linkedin.com/in/dolapol</span>
+          </div>
+        </a>
+        <a href="https://github.com/oludevops" target="_blank" class="contact-link">
+          <div class="contact-link-icon icon-github">⌥</div>
+          <div class="contact-link-info">
+            <span class="contact-link-label">GitHub</span>
+            <span class="contact-link-value">github.com/oludevops</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">© 2025 <span>Olu Lawrence</span> — Built with HTML, CSS & intention.</span>
+  <span class="footer-text">oludevops.github.io</span>
+</footer>
+
+</body>
+</html>
