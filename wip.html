@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>go-health-checker — Work In Progress</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,700&family=DM+Mono:wght@400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #ffffff; color: #1a1917;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 48px;
+    border-top: 4px solid #1d4ed8;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: #1d4ed8; margin-bottom: 24px;
+    border: 1px solid #1d4ed8; padding: 4px 14px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 72px);
+    font-weight: 900; letter-spacing: -2px; line-height: 1;
+    color: #1a1917; margin-bottom: 12px; text-align: center;
+  }
+  h1 em { font-style: italic; color: #6b7280; }
+  .subtitle {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #6b7280; margin-bottom: 32px; text-align: center;
+  }
+  .desc {
+    font-size: 16px; color: #4b5563; max-width: 480px;
+    text-align: center; line-height: 1.8; margin-bottom: 40px;
+  }
+  .desc strong { color: #1a1917; font-weight: 500; }
+  .back {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #1d4ed8; text-decoration: none;
+    border-bottom: 1px solid #1d4ed8; padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .back:hover { opacity: 0.6; }
+  .divider { width: 48px; height: 2px; background: #1d4ed8; margin: 0 auto 32px; }
+</style>
+</head>
+<body>
+  <div class="tag">Project Status</div>
+  <h1>go-health-<em>checker</em></h1>
+  <div class="subtitle">CLI Tool · Written in Go</div>
+  <div class="divider"></div>
+  <p class="desc">
+    This project is currently <strong>work in progress</strong> as part of an ongoing Go learning journey.
+    It will monitor HTTP/HTTPS endpoints, measure latency, check SSL certificate expiry,
+    and output structured JSON ready for Dynatrace BizEvent ingestion.
+    <br/><br/>
+    Follow <strong>github.com/oludevops</strong> for updates when it launches.
+  </p>
+  <a href="index.html" class="back">← Back to Portfolio</a>
+</body>
+</html>

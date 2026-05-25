@@ -152,13 +152,13 @@
 
   .hero-lede {
     font-family: 'Playfair Display', serif; font-size: 17px;
-    font-style: italic; color: #374151; line-height: 1.6;
+    font-style: italic; color: #111827; line-height: 1.6;
     margin-bottom: 20px;
     opacity: 0; animation: fadeUp 0.5s ease forwards 0.55s;
   }
 
   .hero-body {
-    font-size: 14px; color: #374151; line-height: 1.75;
+    font-size: 14px; color: #111827; line-height: 1.75;
     opacity: 0; animation: fadeUp 0.5s ease forwards 0.6s;
   }
   .hero-body strong { color: var(--text); font-weight: 500; }
@@ -193,7 +193,7 @@
   .skill-row {
     display: flex; justify-content: space-between; align-items: center;
     padding: 8px 0; border-bottom: 1px solid var(--border);
-    font-size: 12px; color: #374151;
+    font-size: 12px; color: #111827;
   }
   .skill-row-name { font-weight: 400; }
   .skill-row-tag {
@@ -250,7 +250,7 @@
   .skill-list { display: flex; flex-direction: column; gap: 10px; }
   .skill-item { display: flex; align-items: center; gap: 10px; }
   .skill-dash { width: 12px; height: 1px; background: var(--border-dark); flex-shrink: 0; }
-  .skill-name { font-size: 14px; color: #374151; }
+  .skill-name { font-size: 15px; color: #111827; }
 
   /* EXPERIENCE */
   .experience-list { display: flex; flex-direction: column; }
@@ -270,7 +270,7 @@
     font-family: 'Playfair Display', serif; font-size: 17px;
     font-weight: 700; color: var(--text); margin-bottom: 2px;
   }
-  .exp-client { font-size: 14px; color: var(--muted); margin-bottom: 4px; }
+  .exp-client { font-size: 14px; color: #4b5563; margin-bottom: 4px; }
   .exp-location {
     font-family: 'DM Mono', monospace; font-size: 9px;
     color: #9ca3af; margin-top: 8px; letter-spacing: 0.5px;
@@ -281,7 +281,7 @@
   }
   .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
   .exp-bullets li {
-    display: flex; gap: 14px; font-size: 14px; color: #374151; line-height: 1.65;
+    display: flex; gap: 14px; font-size: 14px; color: #111827; line-height: 1.65;
     padding-bottom: 8px; border-bottom: 1px solid var(--border);
   }
   .exp-bullets li:last-child { border-bottom: none; padding-bottom: 0; }
@@ -309,7 +309,7 @@
     font-family: 'Playfair Display', serif; font-size: 36px;
     font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 12px;
   }
-  .innovation-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+  .innovation-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
   .innovation-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
 
   /* PROJECTS */
@@ -323,6 +323,7 @@
   .project-card:hover { background: var(--surface); }
   .project-card:nth-child(2n) { border-right: none; }
   .project-card:nth-last-child(-n+2) { border-bottom: none; }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
   .project-card.featured { background: var(--text); }
   .project-card.featured:hover { background: #2a2927; }
   .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
@@ -340,7 +341,7 @@
   }
   .project-card.featured .proj-name { color: var(--bg); }
   .project-card.featured .proj-status { border-color: rgba(250,250,248,0.3); color: rgba(250,250,248,0.6); }
-  .proj-desc { font-size: 13px; color: #4b5563; line-height: 1.65; margin-bottom: 20px; }
+  .proj-desc { font-size: 15px; color: #1f2937; line-height: 1.65; margin-bottom: 20px; }
   .project-card.featured .proj-desc { color: rgba(250,250,248,0.55); }
   .proj-footer { display: flex; justify-content: space-between; align-items: center; }
   .proj-lang {
@@ -376,7 +377,7 @@
     font-family: 'DM Mono', monospace; font-size: 8px;
     color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px;
   }
-  .cert-name { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; }
+  .cert-name { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.4; }
 
   /* CONTACT */
   .contact-grid {
@@ -391,7 +392,7 @@
     line-height: 1; margin-bottom: 16px; color: var(--text);
   }
   .contact-left h3 em { font-style: italic; color: var(--accent); }
-  .contact-left p { font-size: 14px; color: #374151; line-height: 1.8; }
+  .contact-left p { font-size: 14px; color: #111827; line-height: 1.8; }
   .contact-right { padding: 48px; }
   .contact-links { display: flex; flex-direction: column; gap: 0; }
   .contact-link {
@@ -406,7 +407,7 @@
     font-family: 'DM Mono', monospace; font-size: 8px;
     color: var(--muted); letter-spacing: 2px; text-transform: uppercase; width: 64px; flex-shrink: 0;
   }
-  .contact-link-value { font-size: 13px; color: var(--text); }
+  .contact-link-value { font-size: 15px; color: var(--text); }
   .contact-link-arrow { margin-left: auto; color: var(--muted); font-size: 11px; }
 
   footer {
@@ -773,7 +774,7 @@
       <span class="section-num">Section 04</span>
     </div>
     <div class="projects-grid">
-      <a class="project-card featured" href="https://github.com/oludevops" target="_blank">
+      <a class="project-card featured" href="wip.html">
         <div class="proj-header"><span></span><span class="proj-status" style="border-color:rgba(250,250,248,0.3);color:rgba(250,250,248,0.6);font-family:'DM Mono',monospace;font-size:8px;padding:2px 8px;letter-spacing:1px">Building</span></div>
         <div class="proj-name">go-health-checker</div>
         <div class="proj-desc">CLI tool in Go monitoring HTTP/HTTPS endpoints, measuring latency, checking SSL expiry, and outputting structured JSON for Dynatrace BizEvent ingestion.</div>
@@ -784,18 +785,6 @@
         <div class="proj-name">plaintext-password-obfuscation</div>
         <div class="proj-desc">Secure process for hiding plaintext passwords in config files using Ansible Vault, Jinja2, and Bash — eliminating critical security exposure in production.</div>
         <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-dt"></span>Ansible Vault · Jinja2 · Bash</span><span class="proj-arrow">↗</span></div>
-      </a>
-      <a class="project-card" href="https://github.com/oludevops" target="_blank">
-        <div class="proj-header"><span></span><span class="proj-status status-wip">In Progress</span></div>
-        <div class="proj-name">k8s-observability-dashboard</div>
-        <div class="proj-desc">Dynatrace Gen3 dashboard with DQL for real-time Kubernetes namespace observability — pod health, resource saturation, and SLO burn rates.</div>
-        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-dt"></span>DQL · Dynatrace</span><span class="proj-arrow">↗</span></div>
-      </a>
-      <a class="project-card" href="https://github.com/oludevops" target="_blank">
-        <div class="proj-header"><span></span><span class="proj-status status-planned">Planned</span></div>
-        <div class="proj-name">otel-pipeline-configs</div>
-        <div class="proj-desc">Production-grade OpenTelemetry collector configurations for filtering, transforming, and deduplicating telemetry — reducing egress costs in cloud environments.</div>
-        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-tf"></span>OpenTelemetry · YAML</span><span class="proj-arrow">↗</span></div>
       </a>
     </div>
     <div class="projects-note">
