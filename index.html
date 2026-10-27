@@ -432,6 +432,8 @@
     .section-wrap { padding: 60px 24px; }
     .skills-grid, .certs-grid, .innovations-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
+    .project-card, .project-card:nth-child(2n), .project-card:nth-last-child(-n+2) { border-right: none; border-bottom: 1px solid var(--border); }
+    .project-card:last-child { border-bottom: none; }
     .exp-item { grid-template-columns: 1fr; gap: 12px; }
     .contact-grid { grid-template-columns: 1fr; }
     .contact-col-divider { display: none; }
@@ -646,6 +648,12 @@
         <div class="proj-name">plaintext-password-obfuscation</div>
         <div class="proj-desc">Secure process for hiding plaintext passwords in config files using Ansible Vault, Jinja2, and Bash — eliminating critical security exposure in production.</div>
         <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-dt"></span>Ansible Vault · Jinja2 · Bash</span><span class="proj-arrow">↗</span></div>
+      </a>
+      <a class="project-card" href="https://github.com/oludevops/aws-cloud-ops-labs" target="_blank">
+        <div class="proj-header"><span></span><span class="proj-status status-live">Live</span></div>
+        <div class="proj-name">aws-cloud-ops-labs</div>
+        <div class="proj-desc">Hands-on AWS operations labs — Terraform drift detection and prevention with S3 remote state and IAM guardrails, plus Windows/IIS break/fix managed entirely through Systems Manager.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-tf"></span>Terraform · AWS SSM · IIS · PowerShell</span><span class="proj-arrow">↗</span></div>
       </a>
     </div>
     <div class="projects-note">
