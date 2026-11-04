@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Olu Lawrence · Web3 & Blockchain Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f7fa;
+    --surface2: #eef1f6;
+    --border: #d0d5df;
+    --border-dark: #a0a8bc;
+    --text: #1a1917;
+    --muted: #374151;
+    --accent: #1d4ed8;
+    --ink: #1a1917;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: #ffffff;
+    border-bottom: 2px solid var(--text);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: stretch;
+    padding: 0 48px;
+  }
+  .nav-logo-wrap {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 16px 0; border-right: 1px solid var(--border);
+    padding-right: 32px; margin-right: 32px;
+  }
+  .nav-logo-label {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: #111827; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif; font-size: 26px;
+    font-weight: 900; color: var(--text); text-decoration: none; letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 0; list-style: none; }
+  .nav-links li { border-right: 1px solid var(--border); }
+  .nav-links a {
+    display: flex; align-items: center;
+    padding: 0 24px; height: 100%;
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: #1f2937; text-decoration: none;
+    letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--surface2); }
+  .nav-right {
+    display: flex; align-items: center;
+    margin-left: auto; padding-left: 24px;
+  }
+  .nav-status {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--accent); letter-spacing: 1px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .status-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  section { position: relative; }
+  .divider { border: none; border-top: 1px solid var(--border); }
+  .divider-bold { border: none; border-top: 2px solid var(--text); }
+
+  /* HERO */
+  .hero-wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; padding-top: 80px; }
+
+  /* Masthead banner */
+  .masthead {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0 16px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.1s;
+  }
+  .masthead-date {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: #111827; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .masthead-issue {
+    font-family: 'Playfair Display', serif; font-size: 15px;
+    font-style: italic; color: #111827;
+  }
+  .masthead-tags { display: flex; gap: 8px; }
+  .masthead-tag {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    padding: 2px 8px; border: 1px solid var(--border-dark);
+    color: #111827; letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* Hero grid — magazine layout */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr 2px 320px;
+    gap: 0;
+    padding: 40px 0;
+    border-bottom: 2px solid var(--text);
+  }
+  .hero-col-divider { background: var(--border); }
+
+  .hero-col-1 { padding-right: 40px; }
+  .hero-col-2 { padding: 0 40px; }
+  .hero-col-3 { padding-left: 40px; }
+
+  .col-label {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: #111827; letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.2s;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 7vw, 92px);
+    font-weight: 900; line-height: 0.9; letter-spacing: -3px;
+    color: var(--text); margin-bottom: 16px;
+    opacity: 0; animation: fadeUp 0.6s ease forwards 0.3s;
+  }
+  .hero-name em { font-style: italic; color: #2d3748; display: block; }
+
+  .hero-red-bar {
+    height: 3px; background: var(--accent); width: 48px; margin-bottom: 16px;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.45s;
+  }
+
+  .hero-title {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    color: #111827; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.5s;
+  }
+
+  .hero-lede {
+    font-family: 'Playfair Display', serif; font-size: 17px;
+    font-style: italic; color: #111827; line-height: 1.6;
+    margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.55s;
+  }
+
+  .hero-body {
+    font-size: 14px; color: #111827; line-height: 1.75;
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.6s;
+  }
+  .hero-body strong { color: var(--text); font-weight: 500; }
+
+  /* Stats column */
+  .stat-block {
+    margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.4s;
+  }
+  .stat-block:last-child { border-bottom: none; margin-bottom: 0; }
+  .stat-num {
+    font-family: 'Playfair Display', serif; font-size: 52px;
+    font-weight: 900; color: var(--text); line-height: 1; letter-spacing: -3px;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    color: #111827; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px;
+  }
+
+  /* Skills pullquote col */
+  .hero-col-2-inner {
+    opacity: 0; animation: fadeUp 0.5s ease forwards 0.5s;
+  }
+  .pullquote {
+    font-family: 'Playfair Display', serif; font-size: 24px;
+    font-style: italic; font-weight: 700; color: var(--text);
+    line-height: 1.3; margin-bottom: 24px; padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pullquote span { color: var(--accent); }
+  .skills-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+  .skill-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 12px; color: #111827;
+  }
+  .skill-row-name { font-weight: 400; }
+  .skill-row-tag {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: #1f2937; letter-spacing: 1px; font-weight: 500;
+  }
+  .hero-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+  .btn-primary {
+    display: block; text-align: center;
+    padding: 12px 20px; background: var(--text); color: var(--bg);
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #333; }
+  .btn-outline {
+    display: block; text-align: center;
+    padding: 12px 20px; border: 1px solid var(--border-dark); color: #111827;
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--text); color: var(--text); }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(12px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  /* SECTION */
+  .section-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 48px; }
+  .section-masthead {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 2px solid var(--text); padding-bottom: 10px; margin-bottom: 48px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 900; letter-spacing: -1px; color: var(--text);
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: #111827; letter-spacing: 2px;
+  }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); }
+  .skill-group { padding: 28px 32px; border-right: 1px solid var(--border); }
+  .skill-group:last-child { border-right: none; }
+  .skill-group-title {
+    font-family: 'DM Mono', monospace; font-size: 11px; color: #1d4ed8;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .skill-list { display: flex; flex-direction: column; gap: 10px; }
+  .skill-item { display: flex; align-items: center; gap: 10px; }
+  .skill-dash { width: 12px; height: 1px; background: var(--border-dark); flex-shrink: 0; }
+  .skill-name { font-size: 15px; color: #111827; }
+
+  /* EXPERIENCE */
+  .experience-list { display: flex; flex-direction: column; }
+  .exp-item {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 48px; padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:first-child { padding-top: 0; }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-left {}
+  .exp-date {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: #111827; letter-spacing: 1px; margin-bottom: 10px;
+  }
+  .exp-company {
+    font-family: 'Playfair Display', serif; font-size: 17px;
+    font-weight: 700; color: var(--text); margin-bottom: 2px;
+  }
+  .exp-client { font-size: 14px; color: #111827; font-weight: 500; margin-bottom: 4px; }
+  .exp-location {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: #111827; margin-top: 8px; letter-spacing: 0.5px;
+  }
+  .exp-role {
+    font-family: 'Playfair Display', serif; font-size: 20px;
+    font-weight: 700; margin-bottom: 14px; color: var(--text); letter-spacing: -0.5px;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .exp-bullets li {
+    display: flex; gap: 14px; font-size: 14px; color: #111827; line-height: 1.65;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  .exp-bullets li:last-child { border-bottom: none; padding-bottom: 0; }
+  .exp-bullets li::before {
+    content: '—'; color: var(--accent); flex-shrink: 0;
+    font-family: 'DM Mono', monospace; font-size: 10px; margin-top: 3px;
+  }
+  .exp-tech { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+  .tech-pill {
+    font-family: 'DM Mono', monospace; font-size: 8px; padding: 3px 8px;
+    border: 1px solid var(--border); color: #111827;
+    background: var(--bg); letter-spacing: 0.5px;
+  }
+
+  /* INNOVATIONS */
+  .innovations-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); }
+  .innovation-card {
+    padding: 28px 32px; border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border); transition: background 0.2s;
+  }
+  .innovation-card:hover { background: var(--surface); }
+  .innovation-card:nth-child(3n) { border-right: none; }
+  .innovation-card:nth-last-child(-n+3) { border-bottom: none; }
+  .innovation-num {
+    font-family: 'Playfair Display', serif; font-size: 36px;
+    font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 12px;
+  }
+  .innovation-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .innovation-desc { font-size: 12px; color: #111827; line-height: 1.6; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 1px solid var(--border); }
+  .project-card {
+    padding: 32px; border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-decoration: none; display: block; color: inherit;
+    transition: background 0.2s;
+  }
+  .project-card:hover { background: var(--surface); }
+  .project-card:nth-child(2n) { border-right: none; }
+  .project-card:nth-last-child(-n+2) { border-bottom: none; }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-card.featured { background: var(--text); }
+  .project-card.featured:hover { background: #2a2927; }
+  .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+  .proj-status {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    padding: 2px 8px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid;
+  }
+  .status-live { background: #1d4ed8; border-color: #1d4ed8; color: #ffffff; }
+  .status-building { border-color: #1d4ed8; color: #1d4ed8; }
+  .status-planned { border-color: var(--border-dark); color: #111827; }
+  .status-wip { border-color: #1d4ed8; color: #1d4ed8; }
+  .proj-name {
+    font-family: 'Playfair Display', serif; font-size: 18px;
+    font-weight: 700; margin-bottom: 10px; color: var(--text); letter-spacing: -0.5px;
+  }
+  .project-card.featured .proj-name { color: var(--bg); }
+  .project-card.featured .proj-status { border-color: rgba(250,250,248,0.3); color: rgba(250,250,248,0.9); }
+  .proj-desc { font-size: 15px; color: #1f2937; line-height: 1.65; margin-bottom: 20px; }
+  .project-card.featured .proj-desc { color: rgba(250,250,248,0.85); }
+  .proj-footer { display: flex; justify-content: space-between; align-items: center; }
+  .proj-lang {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    color: #111827; display: flex; align-items: center; gap: 6px;
+  }
+  .project-card.featured .proj-lang { color: rgba(250,250,248,0.75); }
+  .lang-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .dot-go { background: #00add8; }
+  .dot-dt { background: #00b4a0; }
+  .dot-tf { background: #818cf8; }
+  .proj-arrow { color: #111827; font-size: 13px; transition: transform 0.2s; }
+  .project-card.featured .proj-arrow { color: rgba(250,250,248,0.75); }
+  .project-card:hover .proj-arrow { transform: translate(3px,-3px); }
+  .projects-note {
+    margin-top: 16px;
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    color: #111827; letter-spacing: 0.5px; line-height: 1.7;
+    border-left: 2px solid var(--accent); padding-left: 14px;
+  }
+  .projects-note a { color: var(--text); }
+
+  /* CERTS */
+  .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); }
+  .cert-card {
+    padding: 22px 28px; border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border); transition: background 0.2s;
+  }
+  .cert-card:hover { background: var(--surface); }
+  .cert-card:nth-child(3n) { border-right: none; }
+  .cert-card:nth-last-child(-n+3) { border-bottom: none; }
+  .cert-issuer {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    color: #1d4ed8; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; font-size: 11px;
+  }
+  .cert-name { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.4; }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 2px 1fr;
+    gap: 0; border: 1px solid var(--border);
+  }
+  .contact-col-divider { background: var(--border); }
+  .contact-left { padding: 48px; }
+  .contact-left h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 50px; font-weight: 900; letter-spacing: -2px;
+    line-height: 1; margin-bottom: 16px; color: var(--text);
+  }
+  .contact-left h3 em { font-style: italic; color: var(--accent); }
+  .contact-left p { font-size: 14px; color: #111827; line-height: 1.8; }
+  .contact-right { padding: 48px; }
+  .contact-links { display: flex; flex-direction: column; gap: 0; }
+  .contact-link {
+    display: flex; align-items: center; gap: 20px;
+    padding: 18px 0; border-bottom: 1px solid var(--border);
+    text-decoration: none; color: inherit; transition: padding-left 0.2s;
+  }
+  .contact-link:first-child { padding-top: 0; }
+  .contact-link:last-child { border-bottom: none; }
+  .contact-link:hover { padding-left: 6px; }
+  .contact-link-label {
+    font-family: 'DM Mono', monospace; font-size: 8px;
+    color: #111827; letter-spacing: 2px; text-transform: uppercase; width: 64px; flex-shrink: 0;
+  }
+  .contact-link-value { font-size: 15px; color: var(--text); }
+  .contact-link-arrow { margin-left: auto; color: #111827; font-size: 11px; }
+
+  footer {
+    border-top: 2px solid var(--text); padding: 20px 48px;
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-text {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    color: #111827; letter-spacing: 1px;
+  }
+  .footer-masthead {
+    font-family: 'Playfair Display', serif; font-size: 14px;
+    font-weight: 900; font-style: italic; color: var(--text);
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .hero-wrap { padding: 80px 24px 0; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-col-divider { display: none; }
+    .hero-col-1, .hero-col-2, .hero-col-3 { padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .section-wrap { padding: 60px 24px; }
+    .skills-grid, .certs-grid, .innovations-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card, .project-card:nth-child(2n), .project-card:nth-last-child(-n+2) { border-right: none; border-bottom: 1px solid var(--border); }
+    .project-card:last-child { border-bottom: none; }
+    .exp-item { grid-template-columns: 1fr; gap: 12px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-col-divider { display: none; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo-wrap">
+      <div class="nav-logo-label">Web3 Portfolio</div>
+      <a href="#" class="nav-logo">Olu Lawrence</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://oludevops.github.io/">SRE Portfolio ↗</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-status"><span class="status-dot"></span>Open to opportunities</div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-wrap">
+    <div class="masthead">
+      <span class="masthead-date">Etobicoke, Ontario · Canada · 2026</span>
+      <span class="masthead-issue">Blockchain Infrastructure & Reliability</span>
+      <div class="masthead-tags">
+        <span class="masthead-tag">MIT Blockchain</span>
+        <span class="masthead-tag">HFCP</span>
+        <span class="masthead-tag">Bilingual EN/FR</span>
+      </div>
+    </div>
+
+    <div class="hero-grid">
+      <!-- Col 1: Name & intro -->
+      <div class="hero-col-1">
+        <div class="col-label">SRE · Web3</div>
+        <h1 class="hero-name">Olu<br><em>Lawrence</em></h1>
+        <p class="hero-title">Site Reliability Engineer · Blockchain Infrastructure</p>
+        <p class="hero-lede">"Running blockchain infrastructure with the same discipline as a trading platform."</p>
+        <p class="hero-body">
+          <strong>10+ years</strong> keeping financial systems up, including equity and digital asset trading platforms at Fidelity Investments. I run an Ethereum full node on the Hoodi testnet with Prometheus, Grafana and alerting, and write Solidity smart contracts on Ethereum test networks.
+        </p>
+      </div>
+
+      <div class="hero-col-divider"></div>
+
+      <!-- Col 2: Highlights -->
+      <div class="hero-col-2">
+        <div class="col-label">Node Lab Highlights</div>
+        <div class="hero-col-2-inner">
+          <div class="pullquote">An <span>Ethereum</span> full node, monitored and operated like a production service.</div>
+          <div class="pullquote">Idle CPU raised from <span>3–8%</span> to <span>63–87%</span> by tracing consensus lag to kernel overhead.</div>
+          <div class="hero-actions">
+            <a href="https://github.com/oludevops/ethereum-node-sre-lab" target="_blank" class="btn-primary">View the Node Lab</a>
+            <a href="#contact" class="btn-outline">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-col-divider"></div>
+
+      <!-- Col 3: Stats -->
+      <div class="hero-col-3">
+        <div class="col-label">By the numbers</div>
+        <div class="stat-block">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years in Financial Services</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">9</div>
+          <div class="stat-label">Node Alert Rules</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">10</div>
+          <div class="stat-label">Dashboard Panels as Code</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">7.5m</div>
+          <div class="stat-label">Measured Client Recovery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="section-masthead">
+      <h2 class="section-title">Web3 Competencies</h2>
+      <span class="section-num">Section 01</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Blockchain</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Ethereum: Geth, Lighthouse</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Proof of stake · Engine API · JSON-RPC</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Solidity · OpenZeppelin</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">ERC-20 · ERC-721 · ERC-1155</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">MetaMask · Remix · Ganache · Etherscan</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Digital asset trading platforms</span></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Node Operations & Observability</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Prometheus · Grafana · node_exporter</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Alerting on head lag, peers, stalled chain</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">SLI / SLO / Error Budget frameworks</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Dynatrace (DQL, Gen3, Grail)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">OpenTelemetry pipelines</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Incident response · postmortems</span></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Platform & Automation</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Linux · systemd · kernel tuning</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Least-privilege service design</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Docker · Kubernetes · Helm</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">AWS EKS · Terraform · Ansible</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Python · Bash</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Kafka · FIX Protocol</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-masthead">
+      <h2 class="section-title">Blockchain Projects</h2>
+      <span class="section-num">Section 02</span>
+    </div>
+    <div class="projects-grid">
+      <a class="project-card featured" href="https://github.com/oludevops/ethereum-node-sre-lab" target="_blank">
+        <div class="proj-header"><span></span><span class="proj-status">Live</span></div>
+        <div class="proj-name">ethereum-node-sre-lab</div>
+        <div class="proj-desc">Ethereum full node (Geth + Lighthouse) on the Hoodi testnet with least-privilege service accounts, Prometheus, Grafana, nine alert rules, an incident traced to root cause, and a failure drill with measured recovery.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-dt"></span>Geth · Lighthouse · Prometheus · Grafana</span><span class="proj-arrow">↗</span></div>
+      </a>
+      <a class="project-card" href="https://sepolia.etherscan.io/address/0x4c7e3a0c7159f42eba6106908b26c94830041684#readContract" target="_blank">
+        <div class="proj-header"><span></span><span class="proj-status status-live">Live · Sepolia</span></div>
+        <div class="proj-name">blockchain-real-estate</div>
+        <div class="proj-desc">Property registration smart contract system in Solidity with OpenZeppelin. Tested in Remix IDE and Ganache, wallet-connected through MetaMask, and deployed and verified on Sepolia Etherscan.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-tf"></span>Solidity · OpenZeppelin · MetaMask · Etherscan</span><span class="proj-arrow">↗</span></div>
+      </a>
+      <div class="project-card">
+        <div class="proj-header"><span></span><span class="proj-status status-planned">Planned</span></div>
+        <div class="proj-name">node-rpc-slo</div>
+        <div class="proj-desc">Load testing the node's JSON-RPC endpoint, finding which calls are expensive, and setting a latency SLO with alerting once the node is fully synced.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-go"></span>JSON-RPC · k6 · Prometheus</span><span class="proj-arrow"></span></div>
+      </div>
+      <div class="project-card">
+        <div class="proj-header"><span></span><span class="proj-status status-planned">Planned</span></div>
+        <div class="proj-name">ethereum-node-on-kubernetes</div>
+        <div class="proj-desc">Running the same Geth and Lighthouse pair on k3s with Helm, tuning resource limits, storage and monitoring for the cluster.</div>
+        <div class="proj-footer"><span class="proj-lang"><span class="lang-dot dot-dt"></span>Kubernetes · Helm · k3s</span><span class="proj-arrow"></span></div>
+      </div>
+    </div>
+    <div class="projects-note">
+      My SRE and observability projects are on the main portfolio at <a href="https://oludevops.github.io/">oludevops.github.io</a>.
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- NODE LAB HIGHLIGHTS -->
+<section id="innovations">
+  <div class="section-wrap">
+    <div class="section-masthead">
+      <h2 class="section-title">Inside the Node Lab</h2>
+      <span class="section-num">Section 03</span>
+    </div>
+    <div class="innovations-grid">
+      <div class="innovation-card">
+        <div class="innovation-num">01</div>
+        <div class="innovation-title">Least-Privilege Node</div>
+        <div class="innovation-desc">Each client runs as its own system user with no shell. Private data directories, and a JWT secret only the two clients can read. Tested, not assumed.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-num">02</div>
+        <div class="innovation-title">Two-Client Architecture</div>
+        <div class="innovation-desc">Geth executes transactions and serves JSON-RPC; Lighthouse follows proof of stake and drives Geth over the authenticated Engine API.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-num">03</div>
+        <div class="innovation-title">Alerts from Real Failures</div>
+        <div class="innovation-desc">Nine Prometheus rules covering consensus lag, a stalled chain, peer loss, CPU saturation and disk growth, validated with promtool.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-num">04</div>
+        <div class="innovation-title">Dashboards as Code</div>
+        <div class="innovation-desc">A Python script generates the Grafana dashboard, so the same ten panels come back on any fresh install.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-num">05</div>
+        <div class="innovation-title">Root Cause, Not Guesswork</div>
+        <div class="innovation-desc">Consensus lag looked like a disk problem. Measurement showed CPU starvation from kernel memory compaction; tuning it raised idle CPU from 3–8% to 63–87%.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-num">06</div>
+        <div class="innovation-title">Failure Drill</div>
+        <div class="innovation-desc">Stopped the consensus client on purpose. The alert caught it in about 2 minutes, and recovery took 7.5 minutes, now in the runbook.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-masthead">
+      <h2 class="section-title">Trading & Digital Asset Experience</h2>
+      <span class="section-num">Section 04</span>
+    </div>
+    <div class="experience-list">
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-date">2021 – 2025</div>
+          <div class="exp-company">Fidelity Investments</div>
+          <div class="exp-client">Contract · Insight Global, Spectraforce</div>
+          <div class="exp-location">Jacksonville, FL</div>
+        </div>
+        <div>
+          <div class="exp-role">SRE and Principal Software Engineer</div>
+          <ul class="exp-bullets">
+            <li>Owned reliability of equity and digital asset trading platforms on AWS EKS in a 24x7 environment.</li>
+            <li>Performed capacity planning for Kubernetes trading platforms, ensuring headroom for peak market volumes.</li>
+            <li>Monitored real-time Kafka clusters for reliable event streaming on trading platforms.</li>
+            <li>Ran postmortems and problem management; executed SIFMA business continuity tests.</li>
+            <li>Instrumented SLIs and SLOs for 50+ applications.</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tech-pill">AWS EKS</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">Helm</span><span class="tech-pill">Kafka</span><span class="tech-pill">Terraform</span><span class="tech-pill">Datadog</span><span class="tech-pill">FIX</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-left">
+          <div class="exp-date">2012 – 2018</div>
+          <div class="exp-company">Citibank · Morgan Stanley</div>
+          <div class="exp-client">Electronic Trading</div>
+          <div class="exp-location">Mississauga, ON · Montreal, QC</div>
+        </div>
+        <div>
+          <div class="exp-role">Trading Platform Support</div>
+          <ul class="exp-bullets">
+            <li>Supported high-touch equities OMS in 24x7 production; diagnosed FIX protocol issues for trading clients.</li>
+            <li>Onboarded institutional clients to electronic trading across equities, derivatives, futures and options.</li>
+            <li>Raised monitoring maturity from Level 4 to 5 with Geneos ITRS dashboards and real-time alerting.</li>
+            <li>Ran failover resiliency tests on trading infrastructure.</li>
+          </ul>
+          <div class="exp-tech">
+            <span class="tech-pill">FIX</span><span class="tech-pill">OMS</span><span class="tech-pill">Geneos ITRS</span><span class="tech-pill">Linux</span><span class="tech-pill">Java</span><span class="tech-pill">C++</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-wrap">
+    <div class="section-masthead">
+      <h2 class="section-title">Certifications</h2>
+      <span class="section-num">Section 05</span>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-issuer">MIT</div>
+        <div class="cert-name">Certificate in Blockchain Technology</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">The Linux Foundation</div>
+        <div class="cert-name">Hyperledger Fabric Certified Practitioner · HFCP</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">CSI</div>
+        <div class="cert-name">Canadian Securities Course (equiv. US Series 7)</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">Amazon Web Services</div>
+        <div class="cert-name">Solutions Architect Associate · SAA-C03</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">Amazon Web Services</div>
+        <div class="cert-name">Cloud Practitioner · CLF-C01</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">AXELOS</div>
+        <div class="cert-name">IT Infrastructure Library · ITILv3</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-masthead">
+      <h2 class="section-title">Get In Touch</h2>
+      <span class="section-num">Section 06</span>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <h3>Let's keep<br>the chain<br><em>reliable.</em></h3>
+        <p>Open to SRE and infrastructure roles in blockchain, digital assets and financial services. Bilingual in English and French. Based in Etobicoke, Ontario.</p>
+      </div>
+      <div class="contact-col-divider"></div>
+      <div class="contact-right">
+        <div class="contact-links">
+          <a href="mailto:oludevops@outlook.com" class="contact-link">
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value">oludevops@outlook.com</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/dolapol/" target="_blank" class="contact-link">
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">linkedin.com/in/dolapol</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="https://github.com/oludevops" target="_blank" class="contact-link">
+            <span class="contact-link-label">GitHub</span>
+            <span class="contact-link-value">github.com/oludevops</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="https://oludevops.github.io/" class="contact-link">
+            <span class="contact-link-label">SRE Site</span>
+            <span class="contact-link-value">oludevops.github.io</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-bold"/>
+
+<footer>
+  <span class="footer-text">© 2026 Olu Lawrence · Blockchain Infrastructure & SRE · Etobicoke, ON</span>
+  <span class="footer-masthead">oludevops.github.io/web3</span>
+</footer>
+
+</body>
+</html>
