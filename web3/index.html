@@ -439,6 +439,12 @@
     .contact-col-divider { display: none; }
     footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
   }
+  .skills-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .skills-grid.cols-4 .skill-group { padding: 28px 24px; }
+  @media (max-width: 900px) {
+    .skills-grid.cols-4 { grid-template-columns: 1fr; }
+    .skills-grid.cols-4 .skill-group { border-right: none; border-bottom: 1px solid var(--border); }
+  }
 </style>
 </head>
 <body>
@@ -453,7 +459,6 @@
     <ul class="nav-links">
       <li><a href="#about">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Experience</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="https://oludevops.github.io/">SRE Portfolio ↗</a></li>
     </ul>
@@ -535,81 +540,55 @@
 <section id="about">
   <div class="section-wrap">
     <div class="section-masthead">
-      <h2 class="section-title">Web3 Competencies</h2>
+      <h2 class="section-title">Core Competencies</h2>
       <span class="section-num">Section 01</span>
     </div>
-    <div class="skills-grid">
+    <div class="skills-grid cols-4">
       <div class="skill-group">
-        <div class="skill-group-title">Ethereum Protocol</div>
+        <div class="skill-group-title">Blockchain</div>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Execution &amp; consensus clients: Geth, Lighthouse</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Proof of stake · Beacon Chain</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Engine API · JWT authentication</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">JSON-RPC</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Snap sync · checkpoint sync</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Hoodi · Sepolia testnets</span></div>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Smart Contracts</div>
-        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Ethereum: Geth, Lighthouse</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Proof of stake · Engine API · JSON-RPC</span></div>
           <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Solidity · OpenZeppelin</span></div>
           <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">ERC-20 · ERC-721 · ERC-1155</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Remix IDE · Ganache</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">MetaMask wallet integration</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Contract deployment &amp; Etherscan verification</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">MetaMask · Remix · Ganache · Etherscan</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Hoodi · Sepolia testnets</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Hyperledger Fabric</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Digital asset trading platforms</span></div>
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Node Operations</div>
+        <div class="skill-group-title">Cloud & Infrastructure</div>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Running Ethereum full nodes</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Isolating client services &amp; secrets</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Alerting on head lag, peers, stalled chain</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Client restart &amp; recovery drills</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Permissioned chains · Hyperledger Fabric</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">AWS (EKS, Aurora, DynamoDB, EC2)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Microsoft Azure (VMs, AD, AZ-104)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Google Cloud (GKE, Log Explorer)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Kubernetes, OpenShift, Docker</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Terraform, Ansible, Helm, GitOps</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Azure Policy · ARM Templates</span></div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider"/>
-
-<section id="supporting">
-  <div class="section-wrap">
-    <div class="section-masthead">
-      <h2 class="section-title">Supporting Competencies</h2>
-      <span class="section-num">Section 02</span>
-    </div>
-    <div class="skills-grid">
       <div class="skill-group">
         <div class="skill-group-title">Observability</div>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Prometheus · Grafana · node_exporter</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Dynatrace (DQL, Gen3, Grail)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Dynatrace (DQL, Gen3, Grail, BizEvents)</span></div>
           <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">OpenTelemetry pipelines</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Datadog, Prometheus, Grafana</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Splunk, AppDynamics, Geneos ITRS</span></div>
           <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">SLI / SLO / Error Budget frameworks</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Incident response · postmortems</span></div>
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Platform &amp; Automation</div>
+        <div class="skill-group-title">Engineering & Automation</div>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Linux · systemd · kernel tuning</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Least-privilege service design</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Docker · Kubernetes · Helm</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">AWS EKS · Terraform · Ansible</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Python · Bash</span></div>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Financial Systems</div>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Equity &amp; digital asset trading platforms</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">FIX Protocol · OMS</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Kafka event streaming</span></div>
-          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">SIFMA business continuity testing</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Python, Bash, Perl, Java, C++</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Go (Golang) — actively learning</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Node.js — actively learning</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">CI/CD · Jenkins · GitHub Actions</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Helm · JSON · YAML</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">HashiCorp Sentinel · Rego (OPA)</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Kafka, Redis, PostgreSQL, MongoDB</span></div>
+          <div class="skill-item"><span class="skill-dash"></span><span class="skill-name">Control-M · FIX Protocol · Blockchain</span></div>
         </div>
       </div>
     </div>
@@ -623,7 +602,7 @@
   <div class="section-wrap">
     <div class="section-masthead">
       <h2 class="section-title">Blockchain Projects</h2>
-      <span class="section-num">Section 03</span>
+      <span class="section-num">Section 02</span>
     </div>
     <div class="projects-grid">
       <a class="project-card featured" href="https://github.com/oludevops/ethereum-node-sre-lab" target="_blank">
@@ -660,110 +639,13 @@
 <hr class="divider"/>
 
 <!-- NODE LAB HIGHLIGHTS -->
-<section id="innovations">
-  <div class="section-wrap">
-    <div class="section-masthead">
-      <h2 class="section-title">Inside the Node Lab</h2>
-      <span class="section-num">Section 04</span>
-    </div>
-    <div class="innovations-grid">
-      <div class="innovation-card">
-        <div class="innovation-num">01</div>
-        <div class="innovation-title">Least-Privilege Node</div>
-        <div class="innovation-desc">Each client runs as its own system user with no shell. Private data directories, and a JWT secret only the two clients can read. Tested, not assumed.</div>
-      </div>
-      <div class="innovation-card">
-        <div class="innovation-num">02</div>
-        <div class="innovation-title">Two-Client Architecture</div>
-        <div class="innovation-desc">Geth executes transactions and serves JSON-RPC; Lighthouse follows proof of stake and drives Geth over the authenticated Engine API.</div>
-      </div>
-      <div class="innovation-card">
-        <div class="innovation-num">03</div>
-        <div class="innovation-title">Alerts from Real Failures</div>
-        <div class="innovation-desc">Nine Prometheus rules covering consensus lag, a stalled chain, peer loss, CPU saturation and disk growth, validated with promtool.</div>
-      </div>
-      <div class="innovation-card">
-        <div class="innovation-num">04</div>
-        <div class="innovation-title">Dashboards as Code</div>
-        <div class="innovation-desc">A Python script generates the Grafana dashboard, so the same ten panels come back on any fresh install.</div>
-      </div>
-      <div class="innovation-card">
-        <div class="innovation-num">05</div>
-        <div class="innovation-title">Root Cause, Not Guesswork</div>
-        <div class="innovation-desc">Consensus lag looked like a disk problem. Measurement showed CPU starvation from kernel memory compaction; tuning it raised idle CPU from 3–8% to 63–87%.</div>
-      </div>
-      <div class="innovation-card">
-        <div class="innovation-num">06</div>
-        <div class="innovation-title">Failure Drill</div>
-        <div class="innovation-desc">Stopped the consensus client on purpose. The alert caught it in about 2 minutes, and recovery took 7.5 minutes, now in the runbook.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider"/>
-
 <!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-wrap">
-    <div class="section-masthead">
-      <h2 class="section-title">Trading & Digital Asset Experience</h2>
-      <span class="section-num">Section 05</span>
-    </div>
-    <div class="experience-list">
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-date">2021 – 2025</div>
-          <div class="exp-company">Fidelity Investments</div>
-          <div class="exp-client">Contract · Insight Global, Spectraforce</div>
-          <div class="exp-location">Jacksonville, FL</div>
-        </div>
-        <div>
-          <div class="exp-role">SRE and Principal Software Engineer</div>
-          <ul class="exp-bullets">
-            <li>Owned reliability of equity and digital asset trading platforms on AWS EKS in a 24x7 environment.</li>
-            <li>Performed capacity planning for Kubernetes trading platforms, ensuring headroom for peak market volumes.</li>
-            <li>Monitored real-time Kafka clusters for reliable event streaming on trading platforms.</li>
-            <li>Ran postmortems and problem management; executed SIFMA business continuity tests.</li>
-            <li>Instrumented SLIs and SLOs for 50+ applications.</li>
-          </ul>
-          <div class="exp-tech">
-            <span class="tech-pill">AWS EKS</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">Helm</span><span class="tech-pill">Kafka</span><span class="tech-pill">Terraform</span><span class="tech-pill">Datadog</span><span class="tech-pill">FIX</span>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-date">2012 – 2018</div>
-          <div class="exp-company">Citibank · Morgan Stanley</div>
-          <div class="exp-client">Electronic Trading</div>
-          <div class="exp-location">Mississauga, ON · Montreal, QC</div>
-        </div>
-        <div>
-          <div class="exp-role">Trading Platform Support</div>
-          <ul class="exp-bullets">
-            <li>Supported high-touch equities OMS in 24x7 production; diagnosed FIX protocol issues for trading clients.</li>
-            <li>Onboarded institutional clients to electronic trading across equities, derivatives, futures and options.</li>
-            <li>Raised monitoring maturity from Level 4 to 5 with Geneos ITRS dashboards and real-time alerting.</li>
-            <li>Ran failover resiliency tests on trading infrastructure.</li>
-          </ul>
-          <div class="exp-tech">
-            <span class="tech-pill">FIX</span><span class="tech-pill">OMS</span><span class="tech-pill">Geneos ITRS</span><span class="tech-pill">Linux</span><span class="tech-pill">Java</span><span class="tech-pill">C++</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider"/>
-
 <!-- CERTIFICATIONS -->
 <section id="certs">
   <div class="section-wrap">
     <div class="section-masthead">
       <h2 class="section-title">Certifications</h2>
-      <span class="section-num">Section 06</span>
+      <span class="section-num">Section 03</span>
     </div>
     <div class="certs-grid">
       <div class="cert-card">
@@ -801,7 +683,7 @@
   <div class="section-wrap">
     <div class="section-masthead">
       <h2 class="section-title">Get In Touch</h2>
-      <span class="section-num">Section 07</span>
+      <span class="section-num">Section 04</span>
     </div>
     <div class="contact-grid">
       <div class="contact-left">
