@@ -445,6 +445,14 @@
     .skills-grid.cols-4 { grid-template-columns: 1fr; }
     .skills-grid.cols-4 .skill-group { border-right: none; border-bottom: 1px solid var(--border); }
   }
+  #other-innovations .innovation-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+  #other-innovations .innovation-card:nth-last-child(-n+2) { border-bottom: none; }
+  @media (max-width: 900px) {
+    #other-innovations .innovation-card,
+    #other-innovations .innovation-card:nth-last-child(-n+3),
+    #other-innovations .innovation-card:nth-last-child(-n+2) { border-right: none; border-bottom: 1px solid var(--border); }
+    #other-innovations .innovation-card:nth-last-child(1) { border-bottom: none; }
+  }
 </style>
 </head>
 <body>
@@ -658,6 +666,45 @@
 
 <hr class="divider"/>
 
+<!-- OTHER INNOVATIONS -->
+<section id="other-innovations">
+  <div class="section-wrap">
+    <div class="section-masthead">
+      <h2 class="section-title">Other Innovations</h2>
+      <span class="section-num">Section 04</span>
+    </div>
+    <div class="innovations-grid">
+      <div class="innovation-card">
+        <div class="innovation-num">01</div>
+        <div class="innovation-title">Incident Correlation Tool</div>
+        <div class="innovation-desc">Correlated application outages with maintenance events, reducing MTTR by 90–99%.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-num">02</div>
+        <div class="innovation-title">Access Management Dashboard</div>
+        <div class="innovation-desc">Python dashboard using NumPy and Pandas, reducing manual managerial effort by 90% through instant permission visibility.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-num">03</div>
+        <div class="innovation-title">Website Health Auto-Healing</div>
+        <div class="innovation-desc">Continuous monitoring script with automatic recovery actions — reducing human response time to zero for common failure modes.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-num">04</div>
+        <div class="innovation-title">Automated Alarm Monitoring</div>
+        <div class="innovation-desc">Network agent emulation script extracting alarm logs from vendor equipment and integrating into NMS for real-time visibility.</div>
+      </div>
+      <div class="innovation-card">
+        <div class="innovation-num">05</div>
+        <div class="innovation-title">Knowledge Management Tool</div>
+        <div class="innovation-desc">Microsoft PowerApps desktop application enabling engineers to document and share incident solutions, measurably reducing MTTR.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
 <!-- NODE LAB HIGHLIGHTS -->
 <!-- EXPERIENCE -->
 <!-- CERTIFICATIONS -->
@@ -665,7 +712,7 @@
   <div class="section-wrap">
     <div class="section-masthead">
       <h2 class="section-title">Certifications</h2>
-      <span class="section-num">Section 04</span>
+      <span class="section-num">Section 05</span>
     </div>
     <div class="certs-grid">
       <div class="cert-card">
@@ -703,7 +750,7 @@
   <div class="section-wrap">
     <div class="section-masthead">
       <h2 class="section-title">Get In Touch</h2>
-      <span class="section-num">Section 05</span>
+      <span class="section-num">Section 06</span>
     </div>
     <div class="contact-grid">
       <div class="contact-left">
